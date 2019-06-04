@@ -1,0 +1,12 @@
+<div [class]="'select-mode ' + (isVisible ? 'select-mode_checked' : '')" (click)="toggleMenu($event)">
+  <div class="select-mode__main">
+    {{selectedMode | titlecase}}
+  </div>
+  <i class="fas fa-caret-down select-mode__arrow"></i>
+  <div class="menu" *ngIf="isVisible">
+    <a class="menu__item" [routerLink]="mode" *ngFor="let mode of modes" (click)="selectMode(mode)">
+      {{mode | titlecase}}
+    </a>
+  </div>
+</div>
+

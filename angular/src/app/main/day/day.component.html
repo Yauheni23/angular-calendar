@@ -1,0 +1,17 @@
+<section class="day">
+    <div class="day__header">
+        <div class="day__day-of-week">
+            {{dayOfWeek}}
+        </div>
+        <div class="day__date">
+            <span>{{dateOfWeek}}</span>
+        </div>
+        <span class="day__time-zone">GMT{{timeZone}}</span>
+    </div>
+    <div class="day__main" >
+        <app-day-by-hour></app-day-by-hour>
+        <div class="day__content" [style.height.px]="heightDay">
+<!--            //Task!!!-->
+        </div>
+    </div>
+</section>

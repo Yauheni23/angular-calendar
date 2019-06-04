@@ -1,0 +1,25 @@
+<section class="week">
+    <div class="week__header">
+        <div class="days-of-week">
+            <div *ngFor="let day of daysOfWeek" class="days-of-week__day">
+                {{day}}
+            </div>
+        </div>
+        <div class="date-of-week">
+            <div class="date-of-week__date" *ngFor="let date of dateOfWeek">
+                <span>{{getDate(date)}}</span>
+            </div>
+        </div>
+        <span class="week__time-zone">GMT{{timeZone}}</span>
+    </div>
+    <div class="week__main">
+        <app-day-by-hour></app-day-by-hour>
+        <div class="week-content" [style.height.px]="heightDay">
+            <div class="week-content__days">
+                <div class="week-content__day" *ngFor="let day of [1,2,3,4,5,6,7]">
+<!--                   task-->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,24 @@
+.day-by-hour {
+    width: 64px;
+}
+
+.time-content {
+    position: relative;
+}
+
+.time-content__text{
+    position: absolute;
+    top: -10px;
+    left: 10px;
+}
+
+.time-content::after {
+    content: '';
+    border-bottom: #dadce0 1px solid;
+    position: absolute;
+    width: calc(100vw - 79px);
+    margin-left: 64px;
+    margin-top: -1px;
+    z-index: 3;
+    pointer-events: none;
+}

@@ -1,0 +1,82 @@
+.week {
+    width: 100%;
+    height: calc(100% - 60px);
+    position: relative;
+    text-align: left;
+}
+
+.week__header {
+    position: relative;
+    width: calc(100% - 15px);
+    padding-left: 64px;
+    border-bottom: #dadce0 1px solid;
+}
+
+.days-of-week {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+}
+
+.days-of-week__day {
+    width: calc(100% / 7);
+    text-align: center;
+    font-size: 16px;
+}
+
+.date-of-week {
+    width: 100%;
+    justify-content: space-between;
+    display: flex;
+}
+
+.date-of-week__date {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    font-size: 1.4em;
+}
+
+.week__time-zone {
+    position: absolute;
+    bottom: -19px;
+    left: 7.5px;
+    background: #ffffff;
+    z-index: 4;
+    font-size: 0.75em;
+}
+
+.week__main {
+    display: flex;
+    height: calc(100% - 68px);
+    overflow-y: scroll;
+}
+
+.week-content {
+    display: flex;
+    width: 100%;
+    position: relative;
+}
+
+.week-content__days {
+    display: flex;
+    text-align: center;
+    width: 100%;
+}
+
+.week-content__day {
+    position: relative;
+    text-align: center;
+    width: 100%;
+}
+
+.week-content__day + .week-content__day::after {
+    content: '';
+    position: absolute;
+    top: -40px;
+    left: 0;
+    height: calc(100% + 40px);
+    z-index: 3;
+    pointer-events: none;
+    border-left: 1px solid #dadce0;
+}

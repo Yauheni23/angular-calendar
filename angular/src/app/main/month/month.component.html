@@ -1,0 +1,7 @@
+<section class="month">
+  <div class="month__week" *ngFor="let week of dateInMonth">
+    <div class="month__day" *ngFor="let day of week">
+      {{getDate(day)}}
+    </div>
+  </div>
+</section>
