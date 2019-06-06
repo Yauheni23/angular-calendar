@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { calendar } from '../../constants';
 import { EventManager } from '@angular/platform-browser';
 
@@ -9,7 +9,7 @@ import { EventManager } from '@angular/platform-browser';
 })
 export class SelectModeComponent implements OnInit {
   private modes = calendar.MODES;
-  private selectedMode = 'month'; // получить из роутера
+  @Input() selectedMode; // получить из роутера
   private isVisible = false;
 
   constructor(private eventManager: EventManager) {

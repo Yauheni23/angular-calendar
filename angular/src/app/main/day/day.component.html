@@ -10,8 +10,10 @@
     </div>
     <div class="day__main" >
         <app-day-by-hour></app-day-by-hour>
-        <div class="day__content" [style.height.px]="heightDay">
-<!--            //Task!!!-->
+        <div class="day__content" [style.height.px]="heightDay" (click)="showEditorTask($event)">
+            <app-task (click)="$event.stopPropagation();showViewTask($event);"></app-task>
         </div>
     </div>
+    <app-editor-task [top]="top" [left]="left" *ngIf="isVisibleEditorTask" (actionsDialog)="actionsDialog($event)"></app-editor-task>
+    <app-view-task [top]="top" [left]="left" *ngIf="isVisibleViewTask" (actionsDialog)="actionsDialog($event)"></app-view-task>
 </section>

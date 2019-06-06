@@ -1,7 +1,12 @@
 <section class="month">
   <div class="month__week" *ngFor="let week of dateInMonth">
-    <div class="month__day" *ngFor="let day of week">
+    <div class="month__day" *ngFor="let day of week" (click)="showEditorTask($event)">
       {{getDate(day)}}
     </div>
   </div>
+  <app-editor-task [top]="top" [left]="left" *ngIf="isVisibleEditorTask" (actionsDialog)="actionsDialog($event)">
+  </app-editor-task>
+  <app-view-task [top]="top" [left]="left" *ngIf="isVisibleViewTask" (actionsDialog)="actionsDialog($event)">
+  </app-view-task>
 </section>
+

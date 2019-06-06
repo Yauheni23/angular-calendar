@@ -1,0 +1,25 @@
+<div class="outside-dialog" (click)="closeDialog()">
+    <div class="editor-task" [style.top.px]="top" [style.left.px]="left" (click)="$event.stopPropagation()">
+        <div class='editor-task__close' (click)="closeDialog()">
+            <i class="fas fa-times"></i>
+        </div>
+        <div style="margin-top: 20px">
+            <input autoFocus class='editor-task__name' maxLength=100 placeholder='Add task'/>
+        </div>
+        <div class="editor-task__date">
+            <input type="date">
+            <select name="startTime">
+                <option value="1">00:00</option>
+            </select>
+            <select name="endTime">
+                <option value="1">00:00</option>
+            </select>
+            <input type="date">
+        </div>
+        <div class="editor-task__save">
+            <button class="btn btn-primary">Save</button>
+        </div>
+    </div>
+</div>
+
+

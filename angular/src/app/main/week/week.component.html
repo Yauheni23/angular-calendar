@@ -16,10 +16,12 @@
         <app-day-by-hour></app-day-by-hour>
         <div class="week-content" [style.height.px]="heightDay">
             <div class="week-content__days">
-                <div class="week-content__day" *ngFor="let day of [1,2,3,4,5,6,7]">
-<!--                   task-->
+                <div class="week-content__day" *ngFor="let day of [1,2,3,4,5,6,7]" (click)="showEditorTask($event)">
+                    <app-task (click)="$event.stopPropagation();showViewTask($event);"></app-task>
                 </div>
             </div>
         </div>
     </div>
+    <app-editor-task [top]="top" [left]="left" *ngIf="isVisibleEditorTask" (actionsDialog)="actionsDialog($event)"></app-editor-task>
+    <app-view-task [top]="top" [left]="left" *ngIf="isVisibleViewTask" (actionsDialog)="actionsDialog($event)"></app-view-task>
 </section>

@@ -9,6 +9,9 @@ import { WeekComponent } from './main/week/week.component';
 import { DayComponent } from './main/day/day.component';
 import { SelectModeComponent } from './header/select-mode/select-mode.component';
 import { DayByHourComponent } from './main/shared/day-by-hour/day-by-hour.component';
+import { EditorTaskComponent } from './dialog/editor-task/editor-task.component';
+import { ViewTaskComponent } from './dialog/view-task/view-task.component';
+import { TaskComponent } from './main/shared/task/task.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +21,10 @@ import { DayByHourComponent } from './main/shared/day-by-hour/day-by-hour.compon
     WeekComponent,
     DayComponent,
     SelectModeComponent,
-    DayByHourComponent
+    DayByHourComponent,
+    EditorTaskComponent,
+    ViewTaskComponent,
+    TaskComponent
   ],
   imports: [
     BrowserModule,

@@ -1,19 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { EventManager } from '@angular/platform-browser';
 import { calendar } from '../constants';
+import { NavigationEnd, Router } from '@angular/router';
+import { DateService } from '../services/date.service';
 
 @Component( {
     selector: 'app-header',
     templateUrl: './header.component.html',
-    styleUrls: [ './header.component.less' ]
+    styleUrls: [ './header.component.less' ],
 } )
 export class HeaderComponent implements OnInit {
     private months = calendar.MONTH;
-    private displayedDate = new Date(); // получить из сервиса
-    private modeCalendar = 'month'; // получить из роутера
+    private displayedDate = new Date();
+    private modeCalendar: string;
 
-    constructor( private eventManager: EventManager ) {
+    constructor( private eventManager: EventManager, private router: Router, private dateService: DateService ) {
+        this.router.events.subscribe( ( event ) => {
+            if ( event instanceof NavigationEnd ) {
+                this.modeCalendar = event.url.match( /day|week|month/ )[ 0 ];
+            }
+        } );
         this.eventManager.addGlobalEventListener( 'document', 'keydown', this.addKeyboardEvent );
+        this.displayedDate = this.dateService.getDisplayedDate();
     }
 
     ngOnInit() {
@@ -27,12 +35,12 @@ export class HeaderComponent implements OnInit {
         return this.displayedDate.getFullYear();
     }
 
-    public setMonth( month: number ): void {
-        this.displayedDate.setMonth( month );
+    public setMonth( event: Event ): void {
+        this.displayedDate.setMonth( +( event.target as HTMLSelectElement ).value );
     }
 
-    public setFullYear( year: number ): void {
-        this.displayedDate.setFullYear( year );
+    public setFullYear( event: Event ): void {
+        this.displayedDate.setFullYear( +( event.target as HTMLSelectElement ).value );
     }
 
     private addKeyboardEvent = ( event: KeyboardEvent ) => {
