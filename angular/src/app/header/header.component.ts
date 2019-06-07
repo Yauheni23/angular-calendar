@@ -10,9 +10,10 @@ import { DateService } from '../services/date.service';
     styleUrls: [ './header.component.less' ],
 } )
 export class HeaderComponent implements OnInit {
-    private months = calendar.MONTH;
-    private displayedDate = new Date();
+    public months = calendar.MONTH;
+    private displayedDate: Date;
     private modeCalendar: string;
+    private count: number;
 
     constructor( private eventManager: EventManager, private router: Router, private dateService: DateService ) {
         this.router.events.subscribe( ( event ) => {
@@ -21,7 +22,9 @@ export class HeaderComponent implements OnInit {
             }
         } );
         this.eventManager.addGlobalEventListener( 'document', 'keydown', this.addKeyboardEvent );
-        this.displayedDate = this.dateService.getDisplayedDate();
+        this.dateService.cast.subscribe(date => {
+            this.displayedDate = date;
+        });
     }
 
     ngOnInit() {
@@ -36,7 +39,8 @@ export class HeaderComponent implements OnInit {
     }
 
     public setMonth( event: Event ): void {
-        this.displayedDate.setMonth( +( event.target as HTMLSelectElement ).value );
+        const date = new Date(this.displayedDate.setMonth( +( event.target as HTMLSelectElement ).value ))
+        this.dateService.setDisplayedDate(date);
     }
 
     public setFullYear( event: Event ): void {
@@ -50,7 +54,7 @@ export class HeaderComponent implements OnInit {
         if ( event.key === 'ArrowRight' ) {
             this.changeDisplayedDate( false );
         }
-    };
+    }
 
     public changeDisplayedDate( isPrev: boolean ): void {
         const prevOrNext = isPrev ? -1 : 1;
@@ -65,9 +69,10 @@ export class HeaderComponent implements OnInit {
                 this.displayedDate.setDate( this.displayedDate.getDate() + prevOrNext );
                 break;
         }
+        this.dateService.setDisplayedDate(this.displayedDate);
     }
 
     public showToday(): void {
-        this.displayedDate = new Date();
+        this.dateService.setDisplayedDate(new Date());
     }
 }

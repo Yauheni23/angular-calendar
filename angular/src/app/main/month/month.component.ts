@@ -9,14 +9,14 @@ import { DateService } from '../../services/date.service';
     styleUrls: [ './month.component.less' ],
 } )
 export class MonthComponent extends DialogActions implements OnInit {
-    public dateInMonth = getDaysInMonth( this.displayedDate );
+    public dateInMonth: number[][];
 
-    constructor(private dateService: DateService) {
+    constructor( private dateService: DateService ) {
         super();
-        setInterval(() => {
-            this.displayedDate = this.dateService.getDisplayedDate();
-            }, 1000
-        );
+        this.dateService.cast.subscribe( date => {
+            this.displayedDate = date;
+            this.dateInMonth = getDaysInMonth( this.displayedDate );
+        } );
     }
 
     ngOnInit() {
@@ -30,7 +30,7 @@ export class MonthComponent extends DialogActions implements OnInit {
         super.showEditorTask( event );
         if ( event.x < 450 + event.x % ( event.target as HTMLDivElement ).getBoundingClientRect().width ) {
             this.left = event.x + ( event.target as HTMLDivElement ).getBoundingClientRect().width
-            - event.clientX % ( event.target as HTMLDivElement ).getBoundingClientRect().width;
+                - event.clientX % ( event.target as HTMLDivElement ).getBoundingClientRect().width;
         } else {
             this.left = event.x - 450 - event.clientX % ( event.target as HTMLDivElement ).getBoundingClientRect().width;
         }

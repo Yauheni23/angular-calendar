@@ -6,7 +6,7 @@
             </div>
         </div>
         <div class="date-of-week">
-            <div class="date-of-week__date" *ngFor="let date of dateOfWeek">
+            <div class="date-of-week__date" *ngFor="let date of getDateOfWeek()">
                 <span>{{getDate(date)}}</span>
             </div>
         </div>

@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable( {
     providedIn: 'root',
 } )
 export class DateService {
-    private displayedDate = new Date(2018, 10, 1);
+    private displayedDate = new Date();
+    private date = new BehaviorSubject<Date>(new Date());
+    public cast = this.date.asObservable();
 
     constructor() {
     }
@@ -13,7 +16,8 @@ export class DateService {
         return this.displayedDate;
     }
 
-    setDisplayedDate(date: Date): void {
-        this.displayedDate = date;
+    setDisplayedDate( date: Date ): void {
+        this.date.next(date);
     }
+
 }

@@ -14,11 +14,20 @@ import { Router } from '@angular/router';
 export class DayComponent extends DialogActions implements OnInit {
     public timeZone = getTimeZone();
     private heightDay = size.heightDay;
-    public dayOfWeek = calendar.DAYS_OF_WEEK[ this.displayedDate.getDay() ];
-    public dateOfWeek = this.displayedDate.getDate();
 
-    constructor(private dateService: DateService) {
+    constructor( private dateService: DateService ) {
         super();
+        this.dateService.cast.subscribe(date => {
+            this.displayedDate = date;
+        });
+    }
+
+    getDayOfWeek() {
+        return calendar.DAYS_OF_WEEK[ this.displayedDate.getDay() ];
+    }
+
+    getDate() {
+        return this.displayedDate.getDate();
     }
 
     ngOnInit() {
@@ -27,7 +36,6 @@ export class DayComponent extends DialogActions implements OnInit {
     public showEditorTask = ( event: MouseEvent ): void => {
         super.showEditorTask( event );
         this.changePosition(event);
-        this.dateService.setDisplayedDate(new Date(1111));
     }
 
     public showViewTask = ( event: MouseEvent ): void => {
