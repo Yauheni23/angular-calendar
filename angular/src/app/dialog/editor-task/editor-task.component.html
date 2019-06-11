@@ -7,14 +7,14 @@
             <input autoFocus class='editor-task__name' maxLength=100 placeholder='Add task'/>
         </div>
         <div class="editor-task__date">
-            <input type="date">
+            <app-date-picker [displayedDate]="startDate"></app-date-picker>
             <select name="startTime">
                 <option value="1">00:00</option>
             </select>
             <select name="endTime">
                 <option value="1">00:00</option>
             </select>
-            <input type="date">
+            <app-date-picker [displayedDate]="endDate"></app-date-picker>
         </div>
         <div class="editor-task__save">
             <button class="btn btn-primary">Save</button>

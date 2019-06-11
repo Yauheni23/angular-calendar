@@ -1,0 +1,33 @@
+<div class="date-picker__calendar" (click)="$event.stopPropagation()">
+  <section class="date-picker__header">
+    <div class="change-date">
+      <mat-form-field class="change-date__month">
+        <mat-select [value]="getMonth()">
+          <mat-option *ngFor="let month of months;index as i" [value]="i" (click)="$event.stopPropagation();setMonth(i)">
+            {{month}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="change-date__year">
+        <input matInput type="number" [value]="getFullYear()" (change)="setFullYear($event)" maxLength="5"/>
+      </mat-form-field>
+    </div>
+  </section>
+  <section>
+    <div class="days-of-week">
+      <div *ngFor="let day of dayOfWeek;index as i"
+           class="days-of-week__day"
+           [style.color]="i === 0 || i === 6 ? 'red' : 'black'"
+      >{{day}}</div>
+    </div>
+  </section>
+  <section class="date-picker__main">
+    <div class="date-picker__week" *ngFor="let week of getDateInMonth(); index as indexWeek">
+      <div class="date-picker__day" *ngFor="let day of week" (mousedown)="changeDate(day)">
+        <span [style.color]="day < 1 || (indexWeek > 3 && getDate(day) < 10) ? 'gray' : 'black'"
+              [class]="today === day ? 'today' : ''"
+        >{{getDate(day)}}</span>
+      </div>
+    </div>
+  </section>
+</div>

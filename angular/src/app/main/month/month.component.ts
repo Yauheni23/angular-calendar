@@ -10,12 +10,15 @@ import { DateService } from '../../services/date.service';
 } )
 export class MonthComponent extends DialogActions implements OnInit {
     public dateInMonth: number[][];
+    public today: number | undefined;
 
     constructor( private dateService: DateService ) {
         super();
         this.dateService.cast.subscribe( date => {
             this.displayedDate = date;
             this.dateInMonth = getDaysInMonth( this.displayedDate );
+            this.today = this.displayedDate.getFullYear() === new Date().getFullYear()
+            && this.displayedDate.getMonth() === new Date().getMonth() ? new Date().getDate() : undefined;
         } );
     }
 
@@ -23,7 +26,7 @@ export class MonthComponent extends DialogActions implements OnInit {
     }
 
     getDate( day: number ) {
-        return new Date( this.displayedDate.getFullYear(), this.displayedDate.getMonth(), +day ).getDate();
+        return new Date( this.displayedDate.getFullYear(), this.displayedDate.getMonth(), day ).getDate();
     }
 
     showEditorTask = ( event: any ) => {
@@ -40,4 +43,12 @@ export class MonthComponent extends DialogActions implements OnInit {
             this.top = event.y;
         }
     };
+
+    selectDate(day: number) {
+        this.dateService.setDisplayedDate(new Date(
+            this.displayedDate.getFullYear(),
+            this.displayedDate.getMonth(),
+            day
+        ));
+    }
 }

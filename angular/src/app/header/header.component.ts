@@ -13,18 +13,17 @@ export class HeaderComponent implements OnInit {
     public months = calendar.MONTH;
     private displayedDate: Date;
     private modeCalendar: string;
-    private count: number;
 
     constructor( private eventManager: EventManager, private router: Router, private dateService: DateService ) {
         this.router.events.subscribe( ( event ) => {
             if ( event instanceof NavigationEnd ) {
-                this.modeCalendar = event.url.match( /day|week|month/ )[ 0 ];
+                this.modeCalendar = event.urlAfterRedirects.match( /day|week|month/ )[ 0 ];
             }
         } );
         this.eventManager.addGlobalEventListener( 'document', 'keydown', this.addKeyboardEvent );
-        this.dateService.cast.subscribe(date => {
+        this.dateService.cast.subscribe( date => {
             this.displayedDate = date;
-        });
+        } );
     }
 
     ngOnInit() {
@@ -39,12 +38,11 @@ export class HeaderComponent implements OnInit {
     }
 
     public setMonth( event: Event ): void {
-        const date = new Date(this.displayedDate.setMonth( +( event.target as HTMLSelectElement ).value ))
-        this.dateService.setDisplayedDate(date);
+        this.dateService.setDisplayedDate( new Date( this.displayedDate.setMonth( +( event.target as HTMLSelectElement ).value ) ) );
     }
 
     public setFullYear( event: Event ): void {
-        this.displayedDate.setFullYear( +( event.target as HTMLSelectElement ).value );
+        this.dateService.setDisplayedDate( new Date( this.displayedDate.setFullYear( +( event.target as HTMLInputElement ).value) ) );
     }
 
     private addKeyboardEvent = ( event: KeyboardEvent ) => {
@@ -54,7 +52,7 @@ export class HeaderComponent implements OnInit {
         if ( event.key === 'ArrowRight' ) {
             this.changeDisplayedDate( false );
         }
-    }
+    };
 
     public changeDisplayedDate( isPrev: boolean ): void {
         const prevOrNext = isPrev ? -1 : 1;
@@ -69,10 +67,10 @@ export class HeaderComponent implements OnInit {
                 this.displayedDate.setDate( this.displayedDate.getDate() + prevOrNext );
                 break;
         }
-        this.dateService.setDisplayedDate(this.displayedDate);
+        this.dateService.setDisplayedDate( this.displayedDate );
     }
 
     public showToday(): void {
-        this.dateService.setDisplayedDate(new Date());
+        this.dateService.setDisplayedDate( new Date() );
     }
 }

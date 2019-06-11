@@ -1,0 +1,5 @@
+<div class="date-picker">
+    <app-input [displayedDate]="displayedDate" (changeDisplayedDate)="changeDate($event)"></app-input>
+    <app-calendar [displayedDate]="displayedDate" *ngIf="isVisible" (hideCalendar)="hideCalendar()"></app-calendar>
+    <app-button (toggleCalendar)="toggleCalendar()"></app-button>
+</div>

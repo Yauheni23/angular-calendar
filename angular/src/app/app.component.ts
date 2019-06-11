@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component( {
     selector: 'app-root',
@@ -7,11 +6,8 @@ import { Router } from '@angular/router';
     styleUrls: [ './app.component.less' ],
 } )
 export class AppComponent {
-    title = 'Angular-calendar';
-
-    constructor( private router: Router ) {
-        this.router.events.subscribe(event => {
-            console.log(event);
-        })
+    private startDate = new Date(2015, 10, 15);
+    private endDate = new Date();
+    constructor() {
     }
 }

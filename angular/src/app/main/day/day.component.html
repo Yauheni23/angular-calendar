@@ -4,7 +4,7 @@
             {{getDayOfWeek()}}
         </div>
         <div class="day__date">
-            <span>{{getDate()}}</span>
+            <span  [style.color]="today === getDate() ? 'blue' : 'black'">{{getDate()}}</span>
         </div>
         <span class="day__time-zone">GMT{{timeZone}}</span>
     </div>

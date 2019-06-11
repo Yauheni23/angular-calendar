@@ -7,6 +7,8 @@ import { Dialog } from '../dialog';
     styleUrls: [ './editor-task.component.less' ],
 } )
 export class EditorTaskComponent extends Dialog implements OnInit {
+    private startDate = new Date(2015, 10, 15);
+    private endDate = new Date();
     constructor() {
         super();
     }

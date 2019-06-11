@@ -13,11 +13,14 @@ export class WeekComponent extends DialogActions implements OnInit {
     public timeZone = getTimeZone();
     public heightDay = size.heightDay;
     public daysOfWeek = calendar.DAYS_OF_WEEK;
+    public today: number | undefined;
 
     constructor( private dateService: DateService ) {
         super();
         this.dateService.cast.subscribe(date => {
             this.displayedDate = date;
+            this.today = this.displayedDate.getFullYear() === new Date().getFullYear()
+            && this.displayedDate.getMonth() === new Date().getMonth() ? new Date().getDate() : undefined;
         });
     }
 
@@ -49,6 +52,14 @@ export class WeekComponent extends DialogActions implements OnInit {
             this.top = event.y;
         }
         this.left = document.body.clientWidth / 2 - 225;
+    }
+
+    selectDate(day: number) {
+        this.dateService.setDisplayedDate(new Date(
+            this.displayedDate.getFullYear(),
+            this.displayedDate.getMonth(),
+            day
+        ))
     }
 
 }

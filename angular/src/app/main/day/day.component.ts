@@ -14,11 +14,14 @@ import { Router } from '@angular/router';
 export class DayComponent extends DialogActions implements OnInit {
     public timeZone = getTimeZone();
     private heightDay = size.heightDay;
+    public today: number | undefined;
 
     constructor( private dateService: DateService ) {
         super();
         this.dateService.cast.subscribe(date => {
             this.displayedDate = date;
+            this.today = this.displayedDate.getFullYear() === new Date().getFullYear()
+            && this.displayedDate.getMonth() === new Date().getMonth() ? new Date().getDate() : undefined;
         });
     }
 

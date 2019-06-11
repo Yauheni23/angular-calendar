@@ -13,6 +13,7 @@ export function getDaysInMonth( date: Date ): number[][] {
             arrayDaysInMonth[ i ][ j ] = ( 7 * i ) + j + 1 - dayOfWeek;
         }
     }
+
     return arrayDaysInMonth;
 }
 
@@ -40,5 +41,24 @@ export function getTimeZone() {
     if ( +timeZone >= 10 ) {
         return `+${timeZone}`;
     }
+
     return timeZone;
+}
+
+export function validateDateFromInput(date: string) {
+    return date.search(/[1-9][0-9]{3}-((0[0-9])|(1[0-2]))-(([0-2][0-9])|(3[0-1]))/) !== -1;
+}
+
+export function convertInFormatInput( date: Date ) {
+    let month = date.getMonth() + 1 + '';
+    let day = date.getDate() + '';
+    if ( +month <= 9 ) {
+        month = '0' + month;
+    }
+
+    if ( +day <= 9 ) {
+        day = '0' + day;
+    }
+
+    return `${date.getFullYear()}-${month}-${day}`;
 }
