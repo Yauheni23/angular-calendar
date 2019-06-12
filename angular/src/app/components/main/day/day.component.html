@@ -1,0 +1,19 @@
+<section class="day">
+    <div class="day__header">
+        <div class="day__day-of-week">
+            {{getDayOfWeek()}}
+        </div>
+        <div class="day__date">
+            <span  [style.color]="today === getDate() ? 'blue' : 'black'">{{getDate()}}</span>
+        </div>
+        <span class="day__time-zone">GMT{{timeZone}}</span>
+    </div>
+    <div class="day__main" >
+        <app-day-by-hour></app-day-by-hour>
+        <div class="day__content" [style.height.px]="heightDay" (click)="showEditorTask($event)">
+            <app-task (click)="$event.stopPropagation();showViewTask($event);"></app-task>
+        </div>
+    </div>
+    <app-editor-task *ngIf="isVisibleEditorTask" (actionsDialog)="actionsDialog($event)" [date]="displayedDate"></app-editor-task>
+    <app-view-task *ngIf="isVisibleViewTask" (actionsDialog)="actionsDialog($event)"></app-view-task>
+</section>

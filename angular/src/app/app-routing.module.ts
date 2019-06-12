@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { MonthComponent } from './main/month/month.component';
-import { WeekComponent } from './main/week/week.component';
-import { DayComponent } from './main/day/day.component';
+import { MonthComponent } from './components/main/month/month.component';
+import { WeekComponent } from './components/main/week/week.component';
+import { DayComponent } from './components/main/day/day.component';
 
 const routes: Routes = [
     {

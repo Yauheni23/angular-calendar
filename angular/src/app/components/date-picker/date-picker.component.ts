@@ -18,21 +18,23 @@ export class DatePickerComponent implements OnInit {
     changeDate( date: string ): void {
         const newDate = date.match( /([1-9][0-9]{3})-(0[0-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])/ );
         if ( newDate ) {
-            this.displayedDate = new Date( +newDate[ 1 ], +newDate[ 2 ] - 1, +newDate[ 3 ] );
+            this.displayedDate.setFullYear( +newDate[ 1 ] );
+            this.displayedDate.setMonth( +newDate[ 2 ] - 1 );
+            this.displayedDate.setDate( +newDate[ 3 ] );
         }
     }
 
     toggleCalendar() {
         this.isVisible = !this.isVisible;
         if ( this.isVisible ) {
-            document.addEventListener( 'click', this.hideCalendar );
+            document.addEventListener( 'mousedown', this.hideCalendar );
         } else {
-            document.removeEventListener( 'click', this.hideCalendar );
+            document.removeEventListener( 'mousedown', this.hideCalendar );
         }
     }
 
     hideCalendar = () => {
-        document.removeEventListener( 'click', this.hideCalendar );
+        document.removeEventListener( 'mousedown', this.hideCalendar );
         this.isVisible = false;
     };
 }

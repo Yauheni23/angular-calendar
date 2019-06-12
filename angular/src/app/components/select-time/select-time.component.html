@@ -1,0 +1,12 @@
+<div class="select-time">
+  <mat-form-field class="change-date__month"
+                  [style.width.%]="100"
+                  [style.marginTop.em]="-.84375"
+  >
+    <mat-select [value]="timeValue">
+      <mat-option *ngFor="let time of times; index as i" [value]="i" (click)="setTime(i)">
+        {{time}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

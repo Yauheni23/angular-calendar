@@ -3,15 +3,15 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { MonthComponent } from './main/month/month.component';
-import { WeekComponent } from './main/week/week.component';
-import { DayComponent } from './main/day/day.component';
-import { SelectModeComponent } from './header/select-mode/select-mode.component';
-import { DayByHourComponent } from './main/shared/day-by-hour/day-by-hour.component';
-import { EditorTaskComponent } from './dialog/editor-task/editor-task.component';
-import { ViewTaskComponent } from './dialog/view-task/view-task.component';
-import { TaskComponent } from './main/shared/task/task.component';
+import { HeaderComponent } from './components/header/header.component';
+import { MonthComponent } from './components/main/month/month.component';
+import { WeekComponent } from './components/main/week/week.component';
+import { DayComponent } from './components/main/day/day.component';
+import { SelectModeComponent } from './components/header/select-mode/select-mode.component';
+import { DayByHourComponent } from './components/main/shared/day-by-hour/day-by-hour.component';
+import { EditorTaskComponent } from './components/dialog/editor-task/editor-task.component';
+import { ViewTaskComponent } from './components/dialog/view-task/view-task.component';
+import { TaskComponent } from './components/main/shared/task/task.component';
 import { DatePickerComponent } from './components/date-picker/date-picker.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -20,8 +20,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material';
 import { InputComponent } from './components/date-picker/input/input.component';
 import { CalendarComponent } from './components/date-picker/calendar/calendar.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonComponent } from './components/date-picker/button/button.component';
+import { SelectTimeComponent } from './components/select-time/select-time.component';
 
 
 @NgModule( {
@@ -40,6 +41,7 @@ import { ButtonComponent } from './components/date-picker/button/button.componen
         InputComponent,
         CalendarComponent,
         ButtonComponent,
+        SelectTimeComponent,
     ],
     imports: [
         BrowserModule,
@@ -49,6 +51,7 @@ import { ButtonComponent } from './components/date-picker/button/button.componen
         MatFormFieldModule,
         MatSelectModule,
         ReactiveFormsModule,
+        FormsModule,
     ],
     providers: [],
     bootstrap: [ AppComponent ],

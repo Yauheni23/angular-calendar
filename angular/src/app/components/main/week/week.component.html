@@ -1,0 +1,33 @@
+<section class="week">
+    <div class="week__header">
+        <div class="days-of-week">
+            <div *ngFor="let day of daysOfWeek; index as indexDay"
+                 class="days-of-week__day"
+                 [style.color]="indexDay === 0 || indexDay === 6 ? 'red' : 'black'"
+            >
+                {{day}}
+            </div>
+        </div>
+        <div class="date-of-week">
+            <div class="date-of-week__date" *ngFor="let date of getDateOfWeek()">
+                <a routerLink="/day"
+                   (click)="selectDate(date)"
+                   [style.color]="today === date ? 'blue' : 'black'"
+                >{{getDate(date) + ' ' +  (getDate(date) === 1 ? getMonth(date) : '')}}</a>
+            </div>
+        </div>
+        <span class="week__time-zone">GMT{{timeZone}}</span>
+    </div>
+    <div class="week__main">
+        <app-day-by-hour></app-day-by-hour>
+        <div class="week-content" [style.height.px]="heightDay">
+            <div class="week-content__days">
+                <div class="week-content__day" *ngFor="let day of getDateOfWeek()" (click)="showEditorTask($event, day)">
+                    <app-task (click)="$event.stopPropagation();showViewTask($event);"></app-task>
+                </div>
+            </div>
+        </div>
+    </div>
+    <app-editor-task *ngIf="isVisibleEditorTask" (actionsDialog)="actionsDialog($event)" [date]="displayedDate"></app-editor-task>
+    <app-view-task *ngIf="isVisibleViewTask" (actionsDialog)="actionsDialog($event)"></app-view-task>
+</section>

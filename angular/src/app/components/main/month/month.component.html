@@ -1,0 +1,30 @@
+<section class="month">
+    <div class="week__header">
+        <div class="days-of-week">
+            <div *ngFor="let day of daysOfWeek; index as indexDay"
+                 class="days-of-week__day"
+                 [style.color]="indexDay === 0 || indexDay === 6 ? 'red' : 'black'"
+            >
+                {{day}}
+            </div>
+        </div>
+    </div>
+    <div class="month__week" *ngFor="let week of dateInMonth; index as indexWeek">
+        <div class="month__day" *ngFor="let day of week" (click)="showEditorTask(day)">
+            <a routerLink="/day"
+               [style.color]="day < 1 || (indexWeek > 3 && getDate(day) < 10) ? 'gray' : 'black'"
+               [class]="today === day ? 'today' : ''"
+               (click)="$event.stopPropagation(); selectDate(day)"
+            >
+                {{getDate(day) + ' ' + (getDate(day) === 1 ? getMonth(day) : '')}}
+            </a>
+        </div>
+    </div>
+    <app-editor-task *ngIf="isVisibleEditorTask"
+                     [date]="displayedDate"
+                     (actionsDialog)="actionsDialog($event)">
+    </app-editor-task>
+    <app-view-task *ngIf="isVisibleViewTask" (actionsDialog)="actionsDialog($event)">
+    </app-view-task>
+</section>
+

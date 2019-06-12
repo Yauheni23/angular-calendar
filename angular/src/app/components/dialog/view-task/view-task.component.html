@@ -1,0 +1,23 @@
+<div class="outside-dialog" (click)="closeDialog()">
+    <div class="view-task" (click)="$event.stopPropagation()">
+        <div class='view-task_action view-task__close' (click)="closeDialog()">
+            <i class="fas fa-times"></i>
+        </div>
+        <div class='view-task_action view-task__delete'>
+            <i class="fas fa-trash-alt "></i>
+        </div>
+        <div class='view-task_action view-task__edit'>
+            <i class="fas fa-pencil-alt"></i>
+        </div>
+        <div [style.marginBottom.px]="8">
+            <span>Name: Новое задание для выполнения</span>
+        </div>
+        <div [style.marginBottom.px]="8">
+            <span>Start: {{startDate.toDateString()}}</span>
+        </div>
+        <div [style.marginBottom.px]="8">
+            <span>End: {{endDate.toDateString()}}</span>
+        </div>
+    </div>
+</div>
+

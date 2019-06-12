@@ -1,0 +1,48 @@
+.outside-dialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 4;
+    height: 100vh;
+    width: 100vw;
+}
+
+.view-task {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 50px 25px 15px;
+    background: #ffffff;
+    z-index: 4;
+    box-shadow: 0 0 10px black;
+    width: 450px;
+    height: 200px;
+    border-radius: 3px;
+}
+
+.view-task_action {
+    position: absolute;
+    font-size: 1.1em;
+    top: 10px;
+    transition: 0.2s;
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.view-task__close {
+    right: 15px;
+    font-size: 1.2em;
+    color: #001bc3;
+}
+
+.view-task__delete {
+    right: 45px;
+    color: #c30000;
+}
+
+.view-task__edit {
+    right: 75px;
+    color: #1bc32e;
+}

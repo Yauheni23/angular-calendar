@@ -1,9 +1,9 @@
-<div class="date-picker__calendar" (click)="$event.stopPropagation()">
+<div class="date-picker__calendar" (mousedown)="$event.stopPropagation()">
   <section class="date-picker__header">
     <div class="change-date">
       <mat-form-field class="change-date__month">
         <mat-select [value]="getMonth()">
-          <mat-option *ngFor="let month of months;index as i" [value]="i" (click)="$event.stopPropagation();setMonth(i)">
+          <mat-option *ngFor="let month of months;index as i" [value]="i" (mousedown)="$event.stopPropagation();setMonth(i)">
             {{month}}
           </mat-option>
         </mat-select>
@@ -23,7 +23,7 @@
   </section>
   <section class="date-picker__main">
     <div class="date-picker__week" *ngFor="let week of getDateInMonth(); index as indexWeek">
-      <div class="date-picker__day" *ngFor="let day of week" (mousedown)="changeDate(day)">
+      <div class="date-picker__day" *ngFor="let day of week" (mousedown)="changeDate(day); $event.stopPropagation()">
         <span [style.color]="day < 1 || (indexWeek > 3 && getDate(day) < 10) ? 'gray' : 'black'"
               [class]="today === day ? 'today' : ''"
         >{{getDate(day)}}</span>

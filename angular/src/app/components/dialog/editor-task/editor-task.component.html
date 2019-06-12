@@ -1,0 +1,24 @@
+<div class="outside-dialog" (click)="closeDialog()">
+    <div class="editor-task" (click)="$event.stopPropagation()">
+        <div class='editor-task__close' (click)="closeDialog()">
+            <i class="fas fa-times"></i>
+        </div>
+        <mat-form-field class='editor-task__name'>
+            <input matInput placeholder="Name" [formControl]="nameFormControl">
+            <mat-error *ngIf="nameFormControl.hasError('required')">
+                Name is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+        <div class="editor-task__date">
+            <app-date-picker [displayedDate]="startDate"></app-date-picker>
+            <app-select-time [timeDefault]="startDate"></app-select-time>
+            <app-select-time [timeDefault]="endDate"></app-select-time>
+            <app-date-picker [displayedDate]="endDate"></app-date-picker>
+        </div>
+        <div class="editor-task__save">
+            <button class="btn btn-primary">Save</button>
+        </div>
+    </div>
+</div>
+
+
