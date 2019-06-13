@@ -15,7 +15,7 @@
             <app-select-time [timeDefault]="endDate"></app-select-time>
             <app-date-picker [displayedDate]="endDate"></app-date-picker>
         </div>
-        <div class="editor-task__save">
+        <div class="editor-task__save" (click)="createTask()">
             <button class="btn btn-primary">Save</button>
         </div>
     </div>

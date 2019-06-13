@@ -20,5 +20,4 @@ export class Dialog implements OnInit {
         this.actionsDialog.emit( { type: 'close' } );
         document.removeEventListener( 'keydown', this.closeDialogEscape );
     }
-
 }

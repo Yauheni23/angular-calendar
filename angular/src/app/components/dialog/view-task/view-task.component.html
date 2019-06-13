@@ -3,20 +3,20 @@
         <div class='view-task_action view-task__close' (click)="closeDialog()">
             <i class="fas fa-times"></i>
         </div>
-        <div class='view-task_action view-task__delete'>
+        <div class='view-task_action view-task__delete' (mousedown)="deleteTask()">
             <i class="fas fa-trash-alt "></i>
         </div>
-        <div class='view-task_action view-task__edit'>
+        <div class='view-task_action view-task__edit' (mousedown)="editTask()">
             <i class="fas fa-pencil-alt"></i>
         </div>
         <div [style.marginBottom.px]="8">
-            <span>Name: Новое задание для выполнения</span>
+            <span>Name: {{task.name}}</span>
         </div>
         <div [style.marginBottom.px]="8">
-            <span>Start: {{startDate.toDateString()}}</span>
+            <span>Start: {{task.startDate | date: 'medium'}}</span>
         </div>
         <div [style.marginBottom.px]="8">
-            <span>End: {{endDate.toDateString()}}</span>
+            <span>End: {{task.endDate | date: 'medium'}}</span>
         </div>
     </div>
 </div>

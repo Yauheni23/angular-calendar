@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { calendar } from '../../../constants';
-import { getDaysInMonth } from '../../../../utils/date';
+import { getDaysInMonth } from '../../../utils/date';
 
 @Component( {
     selector: 'app-calendar',

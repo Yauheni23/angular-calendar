@@ -27,11 +27,11 @@ export class SelectTimeComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.timeValue = this.timeDefault.getHours() * 2 + this.timeDefault.getMinutes() / 30 ^ 0 ;
+        this.timeValue = this.timeDefault.getHours() * 2;
+        this.setTime(this.timeValue);
     }
 
     setTime( value: number) {
-        this.timeDefault.setHours( value / 2 ^ 0 );
-        this.timeDefault.setMinutes( value % 2 ? 30 : 0);
+        this.timeDefault.setHours( value / 2 ^ 0, value % 2 ? 30 : 0, 0);
     }
 }

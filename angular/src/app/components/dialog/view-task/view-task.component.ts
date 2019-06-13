@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Dialog } from '../dialog';
+import { Task } from '../../../models/task';
+import { TasksService } from '../../../services/tasks.service';
 
 @Component( {
     selector: 'app-view-task',
@@ -7,14 +9,30 @@ import { Dialog } from '../dialog';
     styleUrls: [ './view-task.component.less' ],
 } )
 export class ViewTaskComponent extends Dialog implements OnInit {
-    public startDate = new Date();
-    public endDate = new Date();
+    @Input() task: Task;
 
-    constructor() {
+    constructor( private tasksService: TasksService ) {
         super();
     }
 
     ngOnInit() {
         super.ngOnInit();
+        document.addEventListener('keydown', this.deleteTaskKey);
+    }
+
+    deleteTaskKey = ( event: KeyboardEvent ) => {
+        if ( event.key === 'Delete' ) {
+            this.deleteTask();
+        }
+    }
+
+    editTask() {
+        this.closeDialog();
+    }
+
+    deleteTask() {
+        this.tasksService.deleteTask( this.task.id );
+        this.closeDialog();
+        document.removeEventListener( 'keydown', this.deleteTaskKey );
     }
 }

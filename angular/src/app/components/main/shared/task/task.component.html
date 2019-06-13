@@ -1,10 +1,16 @@
-<div [style.height.px]="heightHour" [style.top.px]="48" class="task-day" >
-    <div>
-        <p class="task-day__text">
-            {{nameTask}}
-        </p>
-        <p class="task-day__text">
-            {{startDate.toDateString()+ ' - ' +endDate.toDateString()}}
-        </p>
-    </div>
+<div [style.top.px]="top"
+     [style.left.%]="left"
+     [style.width.%]="width"
+     [style.height.px]="height"
+     class="task-day"
+     (click)="showViewTask()"
+>
+    <p class="task-day__text">
+        {{task.name}}
+    </p>
+    <p class="task-day__text">
+        {{(task.startDate | date: 'shortTime') + ' - ' + (task.endDate | date: 'shortTime')}}
+    </p>
 </div>
+<app-view-task *ngIf="isVisibleViewTask" (actionsDialog)="actionsDialog($event)" [task]="task"></app-view-task>
+
