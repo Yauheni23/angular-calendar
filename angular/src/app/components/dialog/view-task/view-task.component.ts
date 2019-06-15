@@ -17,14 +17,19 @@ export class ViewTaskComponent extends Dialog implements OnInit {
 
     ngOnInit() {
         super.ngOnInit();
-        document.addEventListener('keydown', this.deleteTaskKey);
+        document.addEventListener( 'keydown', this.deleteTaskKey );
+    }
+
+    closeDialog() {
+        super.closeDialog();
+        document.removeEventListener( 'keydown', this.deleteTaskKey );
     }
 
     deleteTaskKey = ( event: KeyboardEvent ) => {
         if ( event.key === 'Delete' ) {
             this.deleteTask();
         }
-    }
+    };
 
     editTask() {
         this.closeDialog();

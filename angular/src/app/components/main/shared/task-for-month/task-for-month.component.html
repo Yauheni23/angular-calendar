@@ -1,0 +1,12 @@
+<div class="task-for-month"
+     (click)="showViewTask()"
+>
+    <div class="task-for-month__text">
+        <i class="fas fa-circle task-for-month_color-marker_green"></i>
+        <span style="white-space: nowrap">
+           <span class="task-for-month__text_color_gray">{{ task.startDate | date: 'shortTime'}}</span>
+            <span>{{task.name ? task.name : '(No name)'}}</span>
+        </span>
+    </div>
+</div>
+<app-view-task *ngIf="isVisibleViewTask" (actionsDialog)="actionsDialog($event)" [task]="task"></app-view-task>

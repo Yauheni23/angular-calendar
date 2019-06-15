@@ -6,17 +6,24 @@
         <div class="day__date">
             <span  [style.color]="today === getDate() ? 'blue' : 'black'">{{getDate()}}</span>
         </div>
+        <div [style.position]="'relative'" style="padding: 0 10px; width: 100%">
+            <app-task-for-several-days [isWeek]="false"
+                                       [task]="task"
+                                       *ngFor="let task of tasksForSeveralDays;"
+            ></app-task-for-several-days>
+        </div>
         <span class="day__time-zone">GMT{{timeZone}}</span>
     </div>
+
     <div class="day__main" >
         <app-day-by-hour></app-day-by-hour>
         <div class="day__content" [style.height.px]="heightDay" (click)="showEditorTask($event)">
             <app-task *ngFor="let task of tasks;"
-                      (click)="$event.stopPropagation();showViewTask($event);"
+                      (click)="$event.stopPropagation();"
                       [task]="task"
                       [displayedDate]="displayedDate"
-                      [left]="lefts[task.id] * width"
-                      [width]="width"
+                      [left]="size[task.id] * size.width"
+                      [width]="size.width"
             ></app-task>
         </div>
     </div>

@@ -32,9 +32,17 @@
 .month__day {
     width: calc(100% / 7);
     height: 100%;
-    font-size: 22.4px;
     text-align: center;
     border: 1px solid rgba(0, 0, 0, 0.18);
+    overflow: hidden;
+
+    a {
+        font-size: 22.4px;
+    }
+}
+
+.month__tasks {
+    padding: 0 3px;
 }
 
 .today {

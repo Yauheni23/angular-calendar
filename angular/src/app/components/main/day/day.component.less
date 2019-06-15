@@ -3,6 +3,8 @@
     height: calc(100% - 60px);
     position: relative;
     text-align: left;
+    display: flex;
+    flex-direction: column;
 }
 
 .day__header {
@@ -20,7 +22,6 @@
 
 .day__date {
     width: 100%;
-    height: 100%;
     font-size: 1.4em;
 }
 .day__time-zone {
@@ -33,8 +34,8 @@
 }
 
 .day__main {
+    flex-grow: 1;
     display: flex;
-    height: calc(100% - 68px);
     overflow-y: scroll;
 }
 

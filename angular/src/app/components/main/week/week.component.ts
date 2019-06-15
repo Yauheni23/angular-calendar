@@ -18,26 +18,27 @@ export class WeekComponent extends DialogActions implements OnInit {
     public daysOfWeek = calendar.DAYS_OF_WEEK;
     public today: number | undefined;
     private tasks: Task[];
-    private lefts: any;
-    private width: number;
+    private size: any[];
     private tasksByDays: Task[][];
 
     constructor( private dateService: DateService, private tasksService: TasksService ) {
         super();
+        this.size = new Array(7);
         this.tasksByDays = [];
         this.dateService.cast.subscribe( date => {
             this.displayedDate = date;
             this.today = this.displayedDate.getFullYear() === new Date().getFullYear()
             && this.displayedDate.getMonth() === new Date().getMonth() ? new Date().getDate() : undefined;
-            this.tasksService.cast.subscribe(data => {
+            this.tasksService.cast.subscribe( data => {
                 this.tasks = data;
                 this.tasks.sort( ( a, b ) => {
                     return ( b.endDate.getHours() - b.startDate.getHours() ) - ( a.endDate.getHours() - a.startDate.getHours() );
                 } );
-                this.lefts = considerSize( this.tasks );
                 this.tasksByDays = this.getTasksByDays();
-                this.width = 98 / this.lefts.size;
-            });
+                for ( let i = 0; i < 7; i++ ) {
+                    this.size[ i ] = considerSize( this.tasksByDays[ i ] );
+                }
+            } );
         } );
     }
 
@@ -73,7 +74,7 @@ export class WeekComponent extends DialogActions implements OnInit {
     showEditorTask = ( event: MouseEvent, day: number ) => {
         super.showEditorTask( event );
         this.selectDate( day, event.offsetY / size.heightHour | 0 );
-    }
+    };
 
     selectDate( day: number, hour?: number ) {
         this.dateService.setDisplayedDate( new Date(

@@ -18,8 +18,8 @@ export class DayComponent extends DialogActions implements OnInit {
     private heightDay = size.heightDay;
     public today: number | undefined;
     public tasks: Task[];
-    public lefts: any;
-    public width: number;
+    public tasksForSeveralDays: Task[];
+    public size: any;
 
     constructor( private dateService: DateService, private tasksService: TasksService ) {
         super();
@@ -28,19 +28,23 @@ export class DayComponent extends DialogActions implements OnInit {
             this.today = this.displayedDate.getFullYear() === new Date().getFullYear()
             && this.displayedDate.getMonth() === new Date().getMonth() ? new Date().getDate() : undefined;
 
-            this.tasksService.cast.subscribe(data => {
+            this.tasksService.cast.subscribe( data => {
                 this.tasks = data.filter( task => {
-                    return this.displayedDate.toDateString() === task.startDate.toDateString();
+                    return this.displayedDate.toDateString() === task.startDate.toDateString()
+                        && this.displayedDate.toDateString() === task.endDate.toDateString();
+                } );
+                this.tasksForSeveralDays = data.filter( task => {
+                    return task.startDate.toDateString() !== task.endDate.toDateString()
+                        && +task.startDate <= new Date(this.displayedDate).setHours(24)
+                        && +task.endDate >= new Date(this.displayedDate).setHours(0, 0, 0, 0);
                 } );
                 this.tasks.sort( ( a, b ) => {
                     return ( b.endDate.getHours() - b.startDate.getHours() ) - ( a.endDate.getHours() - a.startDate.getHours() );
                 } );
 
-                this.lefts = considerSize( this.tasks );
-
-                this.width = 98 / this.lefts.size;
-            });
-        });
+                this.size = considerSize( this.tasks );
+            } );
+        } );
     }
 
     ngOnInit() {
@@ -57,5 +61,5 @@ export class DayComponent extends DialogActions implements OnInit {
     public showEditorTask = ( event: MouseEvent ): void => {
         super.showEditorTask( event );
         this.displayedDate.setHours( event.offsetY / size.heightHour | 0 );
-    }
+    };
 }

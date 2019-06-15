@@ -24,6 +24,8 @@ import { CalendarComponent } from './components/date-picker/calendar/calendar.co
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonComponent } from './components/date-picker/button/button.component';
 import { SelectTimeComponent } from './components/select-time/select-time.component';
+import { TaskForMonthComponent } from './components/main/shared/task-for-month/task-for-month.component';
+import { TaskForSeveralDaysComponent } from './components/main/shared/task-for-several-days/task-for-several-days.component';
 
 
 @NgModule( {
@@ -43,6 +45,8 @@ import { SelectTimeComponent } from './components/select-time/select-time.compon
         CalendarComponent,
         ButtonComponent,
         SelectTimeComponent,
+        TaskForMonthComponent,
+        TaskForSeveralDaysComponent,
     ],
     imports: [
         BrowserModule,

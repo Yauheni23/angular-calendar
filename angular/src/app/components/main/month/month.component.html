@@ -12,12 +12,18 @@
     <div class="month__week" *ngFor="let week of dateInMonth; index as indexWeek">
         <div class="month__day" *ngFor="let day of week" (click)="showEditorTask(day)">
             <a routerLink="/day"
-               [style.color]="day < 1 || (indexWeek > 3 && getDate(day) < 10) ? 'gray' : 'black'"
+               [style.color]="day < 1 || (indexWeek > 3 && getDate(day).getDate() < 10) ? 'gray' : 'black'"
                [class]="today === day ? 'today' : ''"
                (click)="$event.stopPropagation(); selectDate(day)"
             >
-                {{getDate(day) + ' ' + (getDate(day) === 1 ? getMonth(day) : '')}}
+                {{getDate(day).getDate() + ' ' + (getDate(day).getDate() === 1 ? getMonth(day) : '')}}
             </a>
+            <div class="month__tasks">
+                <app-task-for-month *ngFor="let task of getTasksForDay(day)"
+                                    [task]="task"
+                                    (click)="$event.stopPropagation();"
+                ></app-task-for-month>
+            </div>
         </div>
     </div>
     <app-editor-task *ngIf="isVisibleEditorTask"

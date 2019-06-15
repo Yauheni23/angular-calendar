@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { getDaysInMonth } from '../../../utils/date';
 import { DialogActions } from '../shared/dialog.actions';
 import { DateService } from '../../../services/date.service';
@@ -17,37 +17,38 @@ export class MonthComponent extends DialogActions implements OnInit {
     public tasks: Task[];
     public daysOfWeek = calendar.DAYS_OF_WEEK;
 
-    constructor( private dateService: DateService, private tasksService: TasksService ) {
+    constructor( private dateService: DateService, private tasksService: TasksService) {
         super();
         this.dateService.cast.subscribe( date => {
             this.displayedDate = date;
             this.dateInMonth = getDaysInMonth( this.displayedDate );
             this.today = this.displayedDate.getFullYear() === new Date().getFullYear()
             && this.displayedDate.getMonth() === new Date().getMonth() ? new Date().getDate() : undefined;
+
+            this.tasksService.cast.subscribe(data => {
+                this.tasks = data;
+                this.tasks.sort( ( a, b ) => {
+                    return  a.startDate.getHours() - b.startDate.getHours();
+                } );
+            });
         } );
-        this.tasksService.getTasks().subscribe(
-            data => {
-            console.log( data );
-        },
-            () =>  {
-            this.tasks = [{
-                id: '1',
-                name: 'Error',
-                startDate: new Date(),
-                endDate: new Date()
-            }];
-        });
     }
 
     ngOnInit() {
     }
 
-    getDate( day: number ) {
-        return new Date( this.displayedDate.getFullYear(), this.displayedDate.getMonth(), day ).getDate();
+    getDate( day: number ): Date {
+        return new Date( this.displayedDate.getFullYear(), this.displayedDate.getMonth(), day );
     }
 
     getMonth( day: number ) {
-        return calendar.MONTH_SHORT[ new Date( this.displayedDate.getFullYear(), this.displayedDate.getMonth(), day ).getMonth() ];
+        return calendar.MONTH_SHORT[ this.getDate(day).getMonth() ];
+    }
+
+    getTasksForDay(day: number) {
+        return this.tasks.filter( task => {
+            return task.startDate.toDateString() === this.getDate(day).toDateString();
+        });
     }
 
     showEditorTask = ( day: number ) => {

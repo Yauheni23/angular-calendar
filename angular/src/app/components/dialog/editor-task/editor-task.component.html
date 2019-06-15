@@ -1,10 +1,11 @@
 <div class="outside-dialog" (click)="closeDialog()">
+
     <div class="editor-task" (click)="$event.stopPropagation()">
         <div class='editor-task__close' (click)="closeDialog()">
             <i class="fas fa-times"></i>
         </div>
         <mat-form-field class='editor-task__name'>
-            <input matInput placeholder="Name" [formControl]="nameFormControl">
+            <input matInput placeholder="Name" [formControl]="nameFormControl" #input>
             <mat-error *ngIf="nameFormControl.hasError('required')">
                 Name is <strong>required</strong>
             </mat-error>
@@ -15,8 +16,8 @@
             <app-select-time [timeDefault]="endDate"></app-select-time>
             <app-date-picker [displayedDate]="endDate"></app-date-picker>
         </div>
-        <div class="editor-task__save" (click)="createTask()">
-            <button class="btn btn-primary">Save</button>
+        <div class="editor-task__save">
+            <button class="btn btn-primary" (click)="createTask()">Save</button>
         </div>
     </div>
 </div>
