@@ -1,13 +1,20 @@
 .task-for-several-days {
     text-align: left;
     height: 22px;
+    line-height: 20px;
     font-size: 14px;
-    background: rgb(3, 155, 229);
+    background-color: rgb(158, 105, 175);
     border-radius: 3px;
     padding: 0 5px;
     position: relative;
     z-index: 3;
-    margin: 2px;
+    margin: 1px 2px 1px 0;
+    border-left: 1px solid white;
+    border-right: 1px solid white;
+
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 .task-for-several-days__text {
@@ -27,14 +34,14 @@
 }
 
 .arrow-left {
-    border-right-color: rgb(3, 155, 229);
+    border-right-color: rgb(158, 105, 175);
     border-right-width: 8px;
     border-left-width: 3px;
     left: -10px;
 }
 
 .arrow-right {
-    border-left-color: rgb(3, 155, 229);
+    border-left-color: rgb(158, 105, 175);
     border-left-width: 8px;
     border-right-width: 3px;
     right: -10px;

@@ -6,7 +6,7 @@
         <div class="day__date">
             <span  [style.color]="today === getDate() ? 'blue' : 'black'">{{getDate()}}</span>
         </div>
-        <div [style.position]="'relative'" style="padding: 0 10px; width: 100%">
+        <div class="tasks-for-several-days">
             <app-task-for-several-days [isWeek]="false"
                                        [task]="task"
                                        *ngFor="let task of tasksForSeveralDays;"

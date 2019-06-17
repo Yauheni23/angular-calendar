@@ -43,4 +43,47 @@ export function searchPlace( matrix: string[][], i: number ): number {
     return i;
 }
 
+export function considerTop( tasks: Task[][], date: Date ) {
+    const matrix = createMatrixTop( tasks, date );
+    const topTasks = {};
+    matrix.forEach( day => {
+        day.forEach( ( id, i ) => {
+            if ( !topTasks[ id ] ) {
+                topTasks[ id ] = i;
+            }
+        } );
+    } );
+
+    let maxSize = 0;
+    for ( const size in topTasks ) {
+        if ( maxSize < topTasks[ size ] ) {
+            maxSize = topTasks[ size ];
+        }
+    }
+
+    return {
+        ...topTasks,
+        maxSize,
+    };
+}
+
+export function createMatrixTop( tasks: Task[][], date: Date ) {
+    const matrix = new Array( 7 );
+    for ( let i = 0; i < 7; i++ ) {
+        matrix[ i ] = [];
+    }
+
+    tasks.forEach( ( day, index ) => {
+        day.forEach( task => {
+            const start = searchPlace( matrix.slice( index ), 0 );
+            const count = ( ( task.endDate.getTime() + -new Date().getTimezoneOffset() * 60000 ) / 86400000 | 0 )
+                - ( ( date.getTime() + -new Date().getTimezoneOffset() * 60000 ) / 86400000 | 0 ) - index;
+            for ( let i = index; i <= index + count && i < 7; i++ ) {
+                matrix[ i ][ start ] = task.id;
+            }
+        } );
+    } );
+
+    return matrix;
+}
 

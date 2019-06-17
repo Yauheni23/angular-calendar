@@ -1,15 +1,12 @@
-<div [style.top.px]="0"
-     [style.left.%]="0"
-     [style.width.%]="100"
+<div [style.width.%]="width"
      [style.height.px]="22"
      class="task-for-several-days"
      (click)="showViewTask()"
 >
     <p class="task-for-several-days__text">
-        {{task.name}}, {{(task.startDate | date: 'medium')}}
+        {{task.name}}, {{(task.startDate | date: 'shortTime')}}
     </p>
     <div *ngIf="leftSide" class="arrow arrow-left"></div>
     <div *ngIf="rightSide" class="arrow arrow-right"></div>
-
 </div>
 <app-view-task *ngIf="isVisibleViewTask" (actionsDialog)="actionsDialog($event)" [task]="task"></app-view-task>

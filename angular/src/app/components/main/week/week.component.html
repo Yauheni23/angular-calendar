@@ -16,6 +16,21 @@
                 >{{getDate(date).getDate() + ' ' +  (getDate(date).getDate() === 1 ? getMonth(date) : '')}}</a>
             </div>
         </div>
+        <div [style.display]="'flex'">
+            <div class="tasks-for-several-days"
+                 *ngFor="let tasksSeveral of tasksForSeveralDays; index as i"
+                 [style.height.px]="(top.maxSize + 1) * 24">
+                <app-task-for-several-days [isWeek]="true"
+                                           *ngFor="let taskSeveral of tasksSeveral"
+                                           [task]="taskSeveral"
+                                           [displayedDate]="getDisplayedDate(i)"
+                                           [style.position]="'absolute'"
+                                           [style.top.px]="top[taskSeveral.id] * 23"
+                                           [style.width.%]="100"
+                ></app-task-for-several-days>
+            </div>
+        </div>
+
         <span class="week__time-zone">GMT{{timeZone}}</span>
     </div>
     <div class="week__main">

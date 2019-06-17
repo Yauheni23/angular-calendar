@@ -9,13 +9,13 @@
         <div class='view-task_action view-task__edit' (mousedown)="editTask()">
             <i class="fas fa-pencil-alt"></i>
         </div>
-        <div [style.marginBottom.px]="8">
+        <div class="view-task__text">
             <span>Name: {{task.name}}</span>
         </div>
-        <div [style.marginBottom.px]="8">
+        <div class="view-task__text">
             <span>Start: {{task.startDate | date: 'medium'}}</span>
         </div>
-        <div [style.marginBottom.px]="8">
+        <div class="view-task__text">
             <span>End: {{task.endDate | date: 'medium'}}</span>
         </div>
     </div>
