@@ -31,10 +31,6 @@ export class ViewTaskComponent extends Dialog implements OnInit {
         }
     };
 
-    editTask() {
-        this.closeDialog();
-    }
-
     deleteTask() {
         this.tasksService.deleteTask( this.task.id );
         this.closeDialog();
