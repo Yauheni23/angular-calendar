@@ -3,7 +3,7 @@ export class DialogActions {
     public isVisibleViewTask = false;
     protected displayedDate: Date;
 
-    public actionsDialog( action: any ) {
+    public actionsDialog( action: any ): void {
         if ( action.type === 'close' ) {
             this.hideEditorTask();
             this.hideViewTask();

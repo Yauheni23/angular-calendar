@@ -1,6 +1,6 @@
 import { Task } from '../models/task';
 
-export function considerSize( tasks: Task[] ) {
+export function considerSize( tasks: Task[] ): any {
     const matrix = createMatrix( tasks );
     const sizeTasks = {};
     matrix.forEach( hour => {
@@ -17,7 +17,7 @@ export function considerSize( tasks: Task[] ) {
     };
 }
 
-export function createMatrix( tasks: Task[] ) {
+export function createMatrix( tasks: Task[] ): string[][] {
     const matrix = new Array( 48 );
     for ( let i = 0; i < 48; i++ ) {
         matrix[ i ] = [];
@@ -43,7 +43,7 @@ export function searchPlace( matrix: string[][], i: number ): number {
     return i;
 }
 
-export function considerTop( tasks: Task[][], date: Date ) {
+export function considerTop( tasks: Task[][], date: Date ): any {
     const matrix = createMatrixTop( tasks, date );
     const topTasks = {};
     matrix.forEach( day => {
@@ -67,7 +67,7 @@ export function considerTop( tasks: Task[][], date: Date ) {
     };
 }
 
-export function createMatrixTop( tasks: Task[][], date: Date ) {
+export function createMatrixTop( tasks: Task[][], date: Date ): string[][] {
     const matrix = new Array( 7 );
     for ( let i = 0; i < 7; i++ ) {
         matrix[ i ] = [];

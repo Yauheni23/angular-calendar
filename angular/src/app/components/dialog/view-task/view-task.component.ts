@@ -20,18 +20,18 @@ export class ViewTaskComponent extends Dialog implements OnInit {
         document.addEventListener( 'keydown', this.deleteTaskKey );
     }
 
-    closeDialog() {
+    closeDialog(): void {
         super.closeDialog();
         document.removeEventListener( 'keydown', this.deleteTaskKey );
     }
 
-    deleteTaskKey = ( event: KeyboardEvent ) => {
+    deleteTaskKey = ( event: KeyboardEvent ): void => {
         if ( event.key === 'Delete' ) {
             this.deleteTask();
         }
     };
 
-    deleteTask() {
+    deleteTask(): void {
         this.tasksService.deleteTask( this.task.id );
         this.closeDialog();
         document.removeEventListener( 'keydown', this.deleteTaskKey );

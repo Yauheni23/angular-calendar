@@ -14,7 +14,7 @@ export class ButtonComponent implements OnInit {
     ngOnInit() {
     }
 
-    clickButton() {
+    clickButton(): void {
         this.toggleCalendar.emit();
     }
 }

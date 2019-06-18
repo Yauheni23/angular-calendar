@@ -29,11 +29,11 @@ export class InputComponent implements OnInit {
     ngOnInit() {
     }
 
-    getDate() {
+    getDate(): string {
         return convertInFormatInput( this.displayedDate || new Date() );
     }
 
-    changeDate( event: Event ) {
+    changeDate( event: Event ): void {
         this.changeDisplayedDate.emit( ( event.target as HTMLInputElement ).value );
     }
 

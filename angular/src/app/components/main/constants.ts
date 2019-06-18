@@ -45,7 +45,7 @@ export const tasksDefault: Task[] = [ {
 }, {
     id: '9',
     name: 'Error2',
-    startDate: new Date( 2019, 5, 10, 5, 0),
-    endDate: new Date( 2019, 5, 20, 10, 30),
+    startDate: new Date( 2019, 5, 10, 5, 0 ),
+    endDate: new Date( 2019, 5, 20, 10, 30 ),
 },
 ];

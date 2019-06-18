@@ -15,7 +15,7 @@ import { considerSize } from '../../../utils/size';
 
 export class DayComponent extends DialogActions implements OnInit {
     public timeZone = getTimeZone();
-    private heightDay = size.heightDay;
+    public heightDay = size.heightDay;
     public today: number | undefined;
     public tasks: Task[];
     public tasksForSeveralDays: Task[];
@@ -50,11 +50,11 @@ export class DayComponent extends DialogActions implements OnInit {
     ngOnInit() {
     }
 
-    getDayOfWeek() {
+    getDayOfWeek(): string {
         return calendar.DAYS_OF_WEEK[ this.displayedDate.getDay() ];
     }
 
-    getDate() {
+    getDate(): number {
         return this.displayedDate.getDate();
     }
 

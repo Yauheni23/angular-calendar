@@ -13,8 +13,8 @@ export class TaskComponent implements OnInit {
     @Input() left: number;
     @Input() width: number;
     public heightHour = size.heightHour;
-    private top: number;
-    private height: number;
+    public top: number;
+    public height: number;
     public isVisibleViewTask: boolean;
 
     constructor() {
@@ -39,7 +39,7 @@ export class TaskComponent implements OnInit {
         }
     }
 
-    public actionsDialog( action: any ) {
+    public actionsDialog( action: any ): void {
         if ( action.type === 'close' ) {
             this.hideViewTask();
         }

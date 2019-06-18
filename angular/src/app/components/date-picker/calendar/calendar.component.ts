@@ -24,11 +24,11 @@ export class CalendarComponent implements OnInit {
         && this.date.getMonth() === new Date().getMonth() ? new Date().getDate() : undefined;
     }
 
-    getDate( day: number ) {
+    getDate( day: number ): number {
         return new Date( this.date.getFullYear(), this.date.getMonth(), day ).getDate();
     }
 
-    getDateInMonth() {
+    getDateInMonth(): number[][]  {
         return getDaysInMonth( this.date );
     }
 
@@ -52,7 +52,7 @@ export class CalendarComponent implements OnInit {
         && this.date.getMonth() === new Date().getMonth() ? new Date().getDate() : undefined;
     }
 
-    changeDate( day: number ) {
+    changeDate( day: number ): void {
         this.displayedDate.setFullYear( this.date.getFullYear() );
         this.displayedDate.setMonth( this.date.getMonth() );
         this.displayedDate.setDate( day );

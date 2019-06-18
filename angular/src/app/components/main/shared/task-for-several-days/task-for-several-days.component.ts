@@ -37,7 +37,7 @@ export class TaskForSeveralDaysComponent implements OnInit {
         } );
     }
 
-    public actionsDialog( action: any ) {
+    public actionsDialog( action: any ): void {
         if ( action.type === 'close' ) {
             this.hideViewTask();
         }

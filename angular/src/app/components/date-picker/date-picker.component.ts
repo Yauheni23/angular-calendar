@@ -22,7 +22,7 @@ export class DatePickerComponent implements OnInit {
         }
     }
 
-    toggleCalendar() {
+    toggleCalendar(): void {
         this.isVisible = !this.isVisible;
         if ( this.isVisible ) {
             document.addEventListener( 'mousedown', this.hideCalendar );

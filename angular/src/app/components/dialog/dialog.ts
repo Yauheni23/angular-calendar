@@ -10,13 +10,13 @@ export class Dialog implements OnInit {
         document.addEventListener( 'keydown', this.closeDialogEscape );
     }
 
-    closeDialogEscape = ( event: KeyboardEvent ) => {
+    closeDialogEscape = ( event: KeyboardEvent ): void => {
         if ( event.key === 'Escape' ) {
             this.closeDialog();
         }
     }
 
-    closeDialog() {
+    closeDialog(): void {
         this.actionsDialog.emit( { type: 'close' } );
         document.removeEventListener( 'keydown', this.closeDialogEscape );
     }

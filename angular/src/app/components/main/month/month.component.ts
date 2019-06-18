@@ -41,22 +41,22 @@ export class MonthComponent extends DialogActions implements OnInit {
         return new Date( this.displayedDate.getFullYear(), this.displayedDate.getMonth(), day );
     }
 
-    getMonth( day: number ) {
+    getMonth( day: number ): string {
         return calendar.MONTH_SHORT[ this.getDate(day).getMonth() ];
     }
 
-    getTasksForDay(day: number) {
+    getTasksForDay(day: number): Task[] {
         return this.tasks.filter( task => {
             return task.startDate.toDateString() === this.getDate(day).toDateString();
         });
     }
 
-    showEditorTask = ( day: number ) => {
+    showEditorTask = ( day: number ): void => {
         super.showEditorTask( event );
         this.selectDate( day );
     }
 
-    selectDate( day: number ) {
+    selectDate( day: number ): void {
         this.dateService.setDisplayedDate( new Date(
             this.displayedDate.getFullYear(),
             this.displayedDate.getMonth(),

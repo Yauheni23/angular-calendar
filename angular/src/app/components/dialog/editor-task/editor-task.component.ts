@@ -33,7 +33,7 @@ export class EditorTaskComponent extends Dialog implements OnInit {
 
     }
 
-    createTask() {
+    createTask(): void {
         if ( this.nameFormControl.value && this.nameFormControl.value.trim() ) {
             this.tasksService.createTask( {
                 id: this.id,

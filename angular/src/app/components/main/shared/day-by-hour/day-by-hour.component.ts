@@ -9,7 +9,7 @@ import { size } from '../../../../constants';
 export class DayByHourComponent implements OnInit {
   public heightDay = size.heightDay;
   public heightHour = size.heightHour;
-  public countBlock = new Array(24)
+  public countBlock = new Array(24);
   constructor() { }
 
   ngOnInit() {
