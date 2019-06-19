@@ -1,38 +1,45 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { DateService } from './date.service';
+import { eventListener } from './constants';
 
-@Component( {
+@Component({
     selector: 'app-date-picker',
     templateUrl: './date-picker.component.html',
     styleUrls: [ './date-picker.component.less' ],
-} )
+    providers: [ DateService ],
+})
 export class DatePickerComponent implements OnInit {
-    @Input() displayedDate: Date;
-    public isVisible = false;
+    public isVisible: boolean = false;
+    @Output() public changeDate = new EventEmitter();
+    @Input() private defaultDate?: Date;
+    private displayedDate: Date;
 
-    constructor() {
+    constructor(private dateService: DateService) {
     }
 
-    ngOnInit() {
+    public ngOnInit() {
+        this.dateService.date = this.defaultDate || new Date();
+        this.dateService.cast.subscribe(date => {
+            this.displayedDate = date;
+            this.changeDate.emit(this.displayedDate);
+        });
     }
 
-    changeDate( date: string ): void {
-        const newDate = date.match( /([1-9][0-9]{3})-(0[0-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])/ );
-        if ( newDate ) {
-            this.displayedDate.setFullYear( +newDate[ 1 ], +newDate[ 2 ] - 1, +newDate[ 3 ]);
-        }
+    public selectDate(date: string): void {
+        this.dateService.setDateFromString(date);
     }
 
-    toggleCalendar() {
+    public toggleCalendar(): void {
         this.isVisible = !this.isVisible;
-        if ( this.isVisible ) {
-            document.addEventListener( 'mousedown', this.hideCalendar );
+        if (this.isVisible) {
+            document.addEventListener(eventListener.MouseDown, this.hideCalendar);
         } else {
-            document.removeEventListener( 'mousedown', this.hideCalendar );
+            document.removeEventListener(eventListener.MouseDown, this.hideCalendar);
         }
     }
 
-    hideCalendar = () => {
-        document.removeEventListener( 'mousedown', this.hideCalendar );
+    public hideCalendar = (): void => {
+        document.removeEventListener(eventListener.MouseDown, this.hideCalendar);
         this.isVisible = false;
-    };
+    }
 }

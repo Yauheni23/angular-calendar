@@ -1,20 +1,14 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
-@Component( {
+@Component({
     selector: 'app-button',
     templateUrl: './button.component.html',
     styleUrls: [ './button.component.less' ],
-} )
-export class ButtonComponent implements OnInit {
-    @Output() toggleCalendar = new EventEmitter();
+})
+export class ButtonComponent {
+    @Output() public toggleCalendar = new EventEmitter();
 
-    constructor() {
-    }
-
-    ngOnInit() {
-    }
-
-    clickButton() {
+    public clickButton(): void {
         this.toggleCalendar.emit();
     }
 }

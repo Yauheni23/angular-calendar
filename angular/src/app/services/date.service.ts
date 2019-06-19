@@ -11,9 +11,7 @@ export class DateService {
     constructor() {
     }
 
-    setDisplayedDate( date: Date ): void {
+    public setDisplayedDate( date: Date ): void {
         this.date.next(date);
     }
-
-
 }

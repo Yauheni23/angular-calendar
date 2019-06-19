@@ -11,10 +11,10 @@
             </mat-error>
         </mat-form-field>
         <div class="editor-task__date">
-            <app-date-picker [displayedDate]="startDate"></app-date-picker>
+            <app-date-picker [defaultDate]="startDate" (changeDate)="changeStartDate($event)"></app-date-picker>
             <app-select-time [timeDefault]="startDate"></app-select-time>
             <app-select-time [timeDefault]="endDate"></app-select-time>
-            <app-date-picker [displayedDate]="endDate"></app-date-picker>
+            <app-date-picker [defaultDate]="endDate" (changeDate)="changeEndDate($event)"></app-date-picker>
         </div>
         <div class="editor-task__save">
             <button class="btn btn-primary" (click)="createTask()">Save</button>

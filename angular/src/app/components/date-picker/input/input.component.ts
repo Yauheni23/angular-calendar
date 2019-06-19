@@ -1,47 +1,29 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { convertInFormatInput, validateDateFromInput } from '../../../utils/date';
-import { AbstractControl, FormControl, Validators } from '@angular/forms';
-import { ErrorStateMatcher } from '@angular/material';
-
-export class MyErrorStateMatcher implements ErrorStateMatcher {
-    isErrorState( control: FormControl | null ): boolean {
-        return !!( control && control.invalid && ( control.dirty || control.touched ) );
-    }
-}
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { convertInFormatInput } from '../../../utils/date';
+import { FormControl, Validators } from '@angular/forms';
+import { DateStringValidator } from '../../../utils/validators';
+import { MyErrorStateMatcher } from '../../../utils/errors';
 
 @Component( {
     selector: 'app-input',
     templateUrl: './input.component.html',
     styleUrls: [ './input.component.less' ],
 } )
-export class InputComponent implements OnInit {
-    @Input() displayedDate: Date;
-    @Output() changeDisplayedDate = new EventEmitter();
+export class InputComponent {
+    private readonly MAX_LENGTH_STRING_DATE: number = 10;
+    @Input() private readonly displayedDate: Date;
+    @Output() public changeDisplayedDate: EventEmitter<string> = new EventEmitter();
     public matcher = new MyErrorStateMatcher();
-    emailFormControl = new FormControl( this.getDate(), [
+    public dateFormControl: FormControl = new FormControl( this.date, [
         Validators.required,
-        DateValidator,
+        DateStringValidator,
     ] );
 
-    constructor() {
-    }
-
-    ngOnInit() {
-    }
-
-    getDate() {
+    public get date(): string {
         return convertInFormatInput( this.displayedDate || new Date() );
     }
 
-    changeDate( event: Event ) {
+    public changeDate( event: Event ): void {
         this.changeDisplayedDate.emit( ( event.target as HTMLInputElement ).value );
     }
-
-}
-
-function DateValidator( control: AbstractControl ): { [ key: string ]: boolean } | null {
-    if ( !validateDateFromInput( control.value ) ) {
-        return { date: true };
-    }
-    return null;
 }

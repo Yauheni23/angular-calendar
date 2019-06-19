@@ -1,10 +1,10 @@
 <mat-form-field [style.marginTop]="'-.84375em'" [style.width.%]="100">
   <input matInput
          type="text"
-         [value]="getDate()"
+         [value]="date"
          (change)="changeDate($event)"
-         maxLength="10"
-         [formControl]="emailFormControl"
+         [maxLength]="MAX_LENGTH_STRING_DATE"
+         [formControl]="dateFormControl"
          [errorStateMatcher]="matcher"
   >
 </mat-form-field>
