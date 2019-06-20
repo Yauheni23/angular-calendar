@@ -10,19 +10,17 @@ import * as uuid from 'uuid/v4';
     styleUrls: [ './editor-task.component.less' ],
 } )
 export class EditorTaskComponent extends Dialog implements OnInit {
-    @Input() private date;
+    @Input() private date: Date;
     @ViewChildren( 'input' ) private input: any;
-    public id: string;
+    public id: string = uuid();
     public startDate: Date;
     public endDate: Date;
-    public nameFormControl: FormControl;
+    public nameFormControl: FormControl = new FormControl( '', [
+        Validators.required,
+    ] );
 
     constructor( private tasksService: TasksService ) {
         super();
-        this.id = uuid();
-        this.nameFormControl = new FormControl( '', [
-            Validators.required,
-        ] );
     }
 
     public ngOnInit() {
@@ -30,10 +28,9 @@ export class EditorTaskComponent extends Dialog implements OnInit {
         this.startDate = new Date( this.date );
         this.endDate = new Date( this.date );
         this.endDate.setHours( this.endDate.getHours() + 1 );
-
     }
 
-    public createTask() {
+    public createTask(): void {
         if ( this.nameFormControl.value && this.nameFormControl.value.trim() ) {
             this.tasksService.createTask( {
                 id: this.id,
@@ -49,7 +46,6 @@ export class EditorTaskComponent extends Dialog implements OnInit {
     }
 
     public changeStartDate(date: Date): void {
-        console.log(1);
         this.startDate = date;
     }
 

@@ -6,8 +6,6 @@ import { Component } from '@angular/core';
     styleUrls: [ './app.component.less' ],
 } )
 export class AppComponent {
-    private startDate = new Date(2015, 10, 15);
-    private endDate = new Date();
     constructor() {
     }
 }

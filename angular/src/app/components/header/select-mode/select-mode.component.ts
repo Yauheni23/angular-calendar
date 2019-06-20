@@ -9,7 +9,7 @@ import { EventManager } from '@angular/platform-browser';
 })
 export class SelectModeComponent implements OnInit {
   private modes = calendar.MODES;
-  @Input() selectedMode;
+  @Input() private selectedMode;
   private isVisible = false;
 
   constructor(private eventManager: EventManager) {

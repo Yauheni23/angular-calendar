@@ -58,10 +58,6 @@ export class CalendarComponent implements OnInit {
         return convertInFormatInput(new Date(this.date.getFullYear(), this.date.getMonth(), day)) === this.todayString ? ' today' : '';
     }
 
-    public isWeekEnd(dayOfWeek: number): string {
-        return dayOfWeek === 0 || dayOfWeek === 6 ? 'red' : '';
-    }
-
     public isCurrentMonth(dayOfWeek: number): string {
         return this.month !== this.getDate(dayOfWeek).getMonth() ? 'gray' : '';
     }

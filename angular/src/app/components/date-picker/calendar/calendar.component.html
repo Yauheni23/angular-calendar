@@ -14,7 +14,6 @@
     <section class="days-of-week">
         <div *ngFor="let day of dayOfWeek;index as i"
              class="days-of-week__day"
-             [style.color]="isWeekEnd(i)"
         >{{day}}</div>
     </section>
     <section class="date-picker__main">
