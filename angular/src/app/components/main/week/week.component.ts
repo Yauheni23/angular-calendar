@@ -23,7 +23,7 @@ export class WeekComponent extends DialogActions implements OnInit {
     public tasksByDays: Task[][];
     public tasksForSeveralDays: Task[][];
 
-    constructor( private dateService: DateService, private tasksService: TasksService ) {
+    constructor( private dateService: DateService, private tasksService: TasksService) {
         super();
         this.size = new Array( 7 );
         this.tasksByDays = [];

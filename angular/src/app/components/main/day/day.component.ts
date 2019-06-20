@@ -6,6 +6,7 @@ import { DateService } from '../../../services/date.service';
 import { TasksService } from '../../../services/tasks.service';
 import { Task } from '../../../models/task';
 import { considerSize } from '../../../utils/size';
+import { EditorService } from '../../../services/editor.service';
 
 @Component( {
     selector: 'app-day',
@@ -21,7 +22,7 @@ export class DayComponent extends DialogActions implements OnInit {
     public tasksForSeveralDays: Task[];
     public size: any;
 
-    constructor( private dateService: DateService, private tasksService: TasksService ) {
+    constructor( private dateService: DateService, private tasksService: TasksService, private _editorService: EditorService ) {
         super();
         this.dateService.cast.subscribe( date => {
             this.displayedDate = date;
@@ -59,7 +60,7 @@ export class DayComponent extends DialogActions implements OnInit {
     }
 
     public showEditorTask = ( event: MouseEvent ): void => {
-        super.showEditorTask( event );
+        this._editorService.show();
         this.displayedDate.setHours( event.offsetY / size.heightHour | 0 );
     };
 }

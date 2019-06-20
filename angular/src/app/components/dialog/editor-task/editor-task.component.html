@@ -1,20 +1,19 @@
 <div class="outside-dialog" (click)="closeDialog()">
-
     <div class="editor-task" (click)="$event.stopPropagation()">
         <div class='editor-task__close' (click)="closeDialog()">
             <i class="fas fa-times"></i>
         </div>
         <mat-form-field class='editor-task__name'>
-            <input matInput placeholder="Name" [formControl]="nameFormControl" #input>
+            <input matInput placeholder="Name" [formControl]="nameFormControl" #input (change)="changeName(nameFormControl.value)">
             <mat-error *ngIf="nameFormControl.hasError('required')">
                 Name is <strong>required</strong>
             </mat-error>
         </mat-form-field>
         <div class="editor-task__date">
-            <app-date-picker [defaultDate]="startDate" (changeDate)="changeStartDate($event)"></app-date-picker>
-            <app-select-time [timeDefault]="startDate"></app-select-time>
-            <app-select-time [timeDefault]="endDate"></app-select-time>
-            <app-date-picker [defaultDate]="endDate" (changeDate)="changeEndDate($event)"></app-date-picker>
+            <app-date-picker [defaultDate]="task.startDate" (changeDate)="changeStartDate($event)"></app-date-picker>
+            <app-select-time [timeDefault]="task.startDate"></app-select-time>
+            <app-select-time [timeDefault]="task.endDate"></app-select-time>
+            <app-date-picker [defaultDate]="task.endDate" (changeDate)="changeEndDate($event)"></app-date-picker>
         </div>
         <div class="editor-task__save">
             <button class="btn btn-primary" (click)="createTask()">Save</button>

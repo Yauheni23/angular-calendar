@@ -10,3 +10,8 @@ export const size = {
     heightHour: 48,
     heightDay: 48 * 24,
 }
+
+export enum Time {
+    HourInMilliseconds = 3600000,
+    DayInMilliseconds = 3600000 * 24
+}

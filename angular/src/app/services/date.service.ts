@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable( {
     providedIn: 'root',
 } )
 export class DateService {
-    private date = new BehaviorSubject<Date>(new Date());
-    public cast = this.date.asObservable();
-
-    constructor() {
-    }
+    private data: BehaviorSubject<Date> = new BehaviorSubject<Date>(new Date());
+    public cast: Observable<Date> = this.data.asObservable();
 
     public setDisplayedDate( date: Date ): void {
-        this.date.next(date);
+        this.data.next(date);
+    }
+
+    public get date(): Date {
+        return this.data.value;
     }
 }

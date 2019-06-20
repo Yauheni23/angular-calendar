@@ -1,4 +1,6 @@
 <div class="body">
     <app-header></app-header>
     <router-outlet></router-outlet>
+    <app-editor-task *ngIf="isVisibleEditorTask"></app-editor-task>
+    <app-view-task *ngIf="isVisibleViewTask"></app-view-task>
 </div>
