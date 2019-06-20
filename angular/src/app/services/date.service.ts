@@ -8,6 +8,9 @@ export class DateService {
     private data: BehaviorSubject<Date> = new BehaviorSubject<Date>(new Date());
     public cast: Observable<Date> = this.data.asObservable();
 
+    constructor() {
+    }
+
     public setDisplayedDate( date: Date ): void {
         this.data.next(date);
     }

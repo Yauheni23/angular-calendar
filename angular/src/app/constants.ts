@@ -15,3 +15,9 @@ export enum Time {
     HourInMilliseconds = 3600000,
     DayInMilliseconds = 3600000 * 24
 }
+
+export enum modes {
+    Month = 'month',
+    Week = 'week',
+    Day = 'day',
+}

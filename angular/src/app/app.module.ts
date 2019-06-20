@@ -27,6 +27,7 @@ import { SelectTimeComponent } from './components/select-time/select-time.compon
 import { TaskForMonthComponent } from './components/main/shared/task-for-month/task-for-month.component';
 import { TaskForSeveralDaysComponent } from './components/main/shared/task-for-several-days/task-for-several-days.component';
 import { DialogComponent } from './components/dialog/dialog/dialog.component';
+import { ChangerDateComponent } from './components/header/changer-date/changer-date.component';
 
 
 @NgModule( {
@@ -49,6 +50,7 @@ import { DialogComponent } from './components/dialog/dialog/dialog.component';
         TaskForMonthComponent,
         TaskForSeveralDaysComponent,
         DialogComponent,
+        ChangerDateComponent,
     ],
     imports: [
         BrowserModule,
