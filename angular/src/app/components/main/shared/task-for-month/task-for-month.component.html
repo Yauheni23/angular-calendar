@@ -1,5 +1,5 @@
 <div class="task-for-month"
-     (click)="showViewTask()"
+     (click)="showTask()"
 >
     <div class="task-for-month__text">
         <i class="fas fa-circle task-for-month_color-marker_green"></i>
@@ -9,4 +9,3 @@
         </span>
     </div>
 </div>
-<app-view-task *ngIf="isVisibleViewTask" (actionsDialog)="actionsDialog($event)" [task]="task"></app-view-task>

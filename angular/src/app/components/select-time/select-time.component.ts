@@ -7,7 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 } )
 export class SelectTimeComponent implements OnInit {
     public times = [];
-    @Input() timeDefault: Date;
+    @Input() public timeDefault: Date;
     public timeValue: number;
 
     constructor() {
@@ -26,12 +26,12 @@ export class SelectTimeComponent implements OnInit {
         }
     }
 
-    ngOnInit() {
+    public ngOnInit() {
         this.timeValue = this.timeDefault.getHours() * 2;
         this.setTime(this.timeValue);
     }
 
-    setTime( value: number) {
+    public setTime( value: number) {
         this.timeDefault.setHours( value / 2 ^ 0, value % 2 ? 30 : 0, 0);
     }
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { DialogService } from '../components/dialog/dialog.service';
+import { DialogService } from '../components/dialog/dialog/dialog.service';
 import { DateService } from './date.service';
 import { Task } from '../models/task';
 import * as uuid from 'uuid/v4';

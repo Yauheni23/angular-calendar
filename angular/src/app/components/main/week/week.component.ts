@@ -6,6 +6,7 @@ import { DateService } from '../../../services/date.service';
 import { TasksService } from '../../../services/tasks.service';
 import { Task } from '../../../models/task';
 import { considerSize, considerTop } from '../../../utils/size';
+import { EditorService } from '../../../services/editor.service';
 
 @Component( {
     selector: 'app-week',
@@ -23,7 +24,7 @@ export class WeekComponent extends DialogActions implements OnInit {
     public tasksByDays: Task[][];
     public tasksForSeveralDays: Task[][];
 
-    constructor( private dateService: DateService, private tasksService: TasksService) {
+    constructor( private dateService: DateService, private tasksService: TasksService, private _editorService: EditorService) {
         super();
         this.size = new Array( 7 );
         this.tasksByDays = [];
@@ -99,7 +100,7 @@ export class WeekComponent extends DialogActions implements OnInit {
     }
 
     showEditorTask = ( event: MouseEvent, day: number): void => {
-        super.showEditorTask( event );
+        this._editorService.show();
         this.selectDate( day, event.offsetY / size.heightHour | 0 );
     };
 

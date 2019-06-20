@@ -12,5 +12,4 @@
         {{(task.startDate | date: 'shortTime') + ' - ' + (task.endDate | date: 'shortTime')}}
     </p>
 </div>
-<app-view-task *ngIf="isVisibleViewTask" (actionsDialog)="actionsDialog($event)" [task]="task"></app-view-task>
 

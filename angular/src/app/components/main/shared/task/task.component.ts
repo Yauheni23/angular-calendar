@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { size } from '../../../../constants';
 import { Task } from '../../../../models/task';
+import { ViewService } from '../../../../services/view.service';
 
 @Component( {
     selector: 'app-task',
@@ -8,19 +9,18 @@ import { Task } from '../../../../models/task';
     styleUrls: [ './task.component.less' ],
 } )
 export class TaskComponent implements OnInit {
-    @Input() task: Task;
-    @Input() displayedDate: Date;
-    @Input() left: number;
-    @Input() width: number;
+    @Input() public task: Task;
+    @Input() public displayedDate: Date;
+    @Input() public left: number;
+    @Input() public width: number;
     public heightHour = size.heightHour;
     private top: number;
     private height: number;
-    public isVisibleViewTask: boolean;
 
-    constructor() {
+    constructor(private _viewService: ViewService) {
     }
 
-    ngOnInit() {
+    public ngOnInit() {
         this.top = 0;
         if ( this.displayedDate.toDateString() === this.task.startDate.toDateString() ) {
             this.top = ( this.task.startDate.getHours() + this.task.startDate.getMinutes() / 60 ) * this.heightHour;
@@ -39,17 +39,7 @@ export class TaskComponent implements OnInit {
         }
     }
 
-    public actionsDialog( action: any ) {
-        if ( action.type === 'close' ) {
-            this.hideViewTask();
-        }
-    }
-
     public showViewTask(): void {
-        this.isVisibleViewTask = true;
-    }
-
-    public hideViewTask = (): void => {
-        this.isVisibleViewTask = false;
+        this._viewService.show(this.task);
     }
 }

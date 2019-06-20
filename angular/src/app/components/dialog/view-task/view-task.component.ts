@@ -1,34 +1,28 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Dialog } from '../dialog';
+import { Component, OnInit } from '@angular/core';
 import { Task } from '../../../models/task';
 import { TasksService } from '../../../services/tasks.service';
 import { eventListener, keyBoard } from '../../constants';
+import { ViewService } from '../../../services/view.service';
 
 @Component({
     selector: 'app-view-task',
     templateUrl: './view-task.component.html',
     styleUrls: [ './view-task.component.less' ],
 })
-export class ViewTaskComponent extends Dialog implements OnInit {
-    @Input() public task: Task;
+export class ViewTaskComponent implements OnInit {
+    public task: Task;
 
-    constructor(private tasksService: TasksService) {
-        super();
+    constructor(private tasksService: TasksService, private _viewService: ViewService) {
+        this.task = this._viewService.task;
     }
 
     public ngOnInit(): void {
-        super.ngOnInit();
         document.addEventListener(eventListener.KeyDown, this.deleteTaskKey);
     }
 
     public deleteTask(): void {
         this.tasksService.deleteTask(this.task.id);
-        this.closeDialog();
-    }
-
-    public closeDialog(): void {
-        super.closeDialog();
-        document.removeEventListener(eventListener.KeyDown, this.deleteTaskKey);
+        this._viewService.hide();
     }
 
     private deleteTaskKey = (event: KeyboardEvent): void => {

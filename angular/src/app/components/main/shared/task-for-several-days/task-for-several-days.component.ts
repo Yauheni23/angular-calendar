@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Task } from '../../../../models/task';
 import { DateService } from '../../../../services/date.service';
 import { convertInFormatInput, getArrayDaysInWeek } from '../../../../utils/date';
+import { ViewService } from '../../../../services/view.service';
 
 @Component( {
     selector: 'app-task-for-several-days',
@@ -9,18 +10,17 @@ import { convertInFormatInput, getArrayDaysInWeek } from '../../../../utils/date
     styleUrls: [ './task-for-several-days.component.less' ],
 } )
 export class TaskForSeveralDaysComponent implements OnInit {
-    @Input() isWeek: boolean;
-    @Input() task: Task;
-    @Input() displayedDate?: Date;
-    public isVisibleViewTask: boolean;
+    @Input() public isWeek: boolean;
+    @Input() public task: Task;
+    @Input() public displayedDate?: Date;
     public leftSide: boolean;
     public rightSide: boolean;
     public width: number;
 
-    constructor( private dateService: DateService ) {
+    constructor( private dateService: DateService, private _viewService: ViewService ) {
     }
 
-    ngOnInit() {
+    public ngOnInit() {
         this.dateService.cast.subscribe( date => {
             if ( this.isWeek ) {
                 this.width = considerWidth( this.task, this.displayedDate );
@@ -37,19 +37,9 @@ export class TaskForSeveralDaysComponent implements OnInit {
         } );
     }
 
-    public actionsDialog( action: any ) {
-        if ( action.type === 'close' ) {
-            this.hideViewTask();
-        }
-    }
-
     public showViewTask(): void {
-        this.isVisibleViewTask = true;
+        this._viewService.show(this.task);
     }
-
-    public hideViewTask = (): void => {
-        this.isVisibleViewTask = false;
-    };
 }
 
 function considerWidth( task: Task, displayedDate: Date ) {

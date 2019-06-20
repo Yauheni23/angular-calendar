@@ -1,5 +1,5 @@
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Task } from '../../models/task';
+import { Task } from '../../../models/task';
 
 export abstract class DialogService {
     public cast: Observable<boolean>;
@@ -11,12 +11,12 @@ export abstract class DialogService {
         this.cast = this.data.asObservable();
     }
 
-    public show(task?: Task) {
+    public show(task?: Task): void {
         this.data.next(true);
         this.task = task;
     }
 
-    public hide() {
+    public hide(): void {
         this.data.next(false);
     }
 
