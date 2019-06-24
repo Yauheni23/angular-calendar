@@ -10,14 +10,14 @@ import { DateService } from '../date.service';
 })
 
 export class CalendarComponent implements OnInit {
+    public readonly todayString: string;
     public readonly months = calendar.MONTH_SHORT;
     public readonly dayOfWeek = calendar.DAYS_OF_WEEK_SHORT;
     @Input() private readonly displayedDate: Date;
     @Output() public hideCalendar = new EventEmitter();
-    public todayString: string;
     public date: Date;
 
-    constructor(private dateService: DateService) {
+    constructor(private _dateService: DateService) {
         this.todayString = convertInFormatInput(new Date());
     }
 
@@ -46,7 +46,7 @@ export class CalendarComponent implements OnInit {
     }
 
     public changeDate(day: number) {
-        this.dateService.date = new Date(this.date.getFullYear(), this.date.getMonth(), day);
+        this._dateService.date = new Date(this.date.getFullYear(), this.date.getMonth(), day);
         this.hideCalendar.emit();
     }
 

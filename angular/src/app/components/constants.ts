@@ -6,5 +6,6 @@ export enum eventListener {
 
 export enum keyBoard {
     Escape = 'Escape',
-    Delete = 'Delete',
+    ArrowLeft = 'ArrowLeft',
+    ArrowRight = 'ArrowRight',
 }

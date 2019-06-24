@@ -1,54 +1,41 @@
 <section class="week">
     <div class="week__header">
-        <div class="days-of-week">
-            <div *ngFor="let day of daysOfWeek; index as indexDay"
-                 class="days-of-week__day"
-                 [style.color]="indexDay === 0 || indexDay === 6 ? 'red' : 'black'"
-            >
-                {{day}}
-            </div>
-        </div>
+        <app-days-of-week></app-days-of-week>
         <div class="date-of-week">
-            <div class="date-of-week__date" *ngFor="let date of getDateOfWeek()">
-                <a routerLink="/day"
-                   (click)="selectDate(date)"
-                   [style.color]="today === date ? 'blue' : 'black'"
-                >{{getDate(date).getDate() + ' ' +  (getDate(date).getDate() === 1 ? getMonth(date) : '')}}</a>
+            <div class="date-of-week__date" *ngFor="let date of dateOfWeek">
+                <app-link-to-day [day]="date"></app-link-to-day>
             </div>
         </div>
         <div [style.display]="'flex'">
-            <div class="tasks-for-several-days"
-                 *ngFor="let tasksSeveral of tasksForSeveralDays; index as i"
-                 [style.height.px]="(top.maxSize + 1) * 24">
-                <app-task-for-several-days [isWeek]="true"
-                                           *ngFor="let taskSeveral of tasksSeveral"
+            <div *ngFor="let tasksSeveral of tasksForSeveralDays; index as i"
+                 class="tasks-for-several-days"
+                 [style.height.px]="(top.maxSize ) * heightHour / 2"
+            >
+                <app-task-for-several-days *ngFor="let taskSeveral of tasksSeveral"
+                                           [isWeek]="true"
                                            [task]="taskSeveral"
-                                           [displayedDate]="getDisplayedDate(i)"
-                                           [style.position]="'absolute'"
-                                           [style.top.px]="top[taskSeveral.id] * 23"
-                                           [style.width.%]="100"
+                                           [displayedDate]="getCurrentDate(i)"
+                                           [ngStyle]="{'position': 'absolute', 'width': '100%'}"
+                                           [style.top.px]="top[taskSeveral.id] * heightHour / 2"
                 ></app-task-for-several-days>
             </div>
         </div>
-
         <span class="week__time-zone">GMT{{timeZone}}</span>
     </div>
     <div class="week__main">
         <app-day-by-hour></app-day-by-hour>
         <div class="week-content" [style.height.px]="heightDay">
             <div class="week-content__days">
-                <div class="week-content__day"
-                     *ngFor="let day of getDateOfWeek();index as i"
-                     (click)="showEditorTask($event, day)"
+                <app-container-day *ngFor="let date of dateOfWeek;index as i"
+                                   [day]="date"
+                                   class="week-content__day"
                 >
                     <app-task *ngFor="let task of tasksByDays[i]"
-                              (click)="$event.stopPropagation();showViewTask($event);"
                               [task]="task"
-                              [displayedDate]="getDate(day)"
                               [left]="size[i][task.id] * size[i].width"
                               [width]="size[i].width"
                     ></app-task>
-                </div>
+                </app-container-day>
             </div>
         </div>
     </div>

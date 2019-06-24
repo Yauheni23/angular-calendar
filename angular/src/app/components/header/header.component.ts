@@ -8,12 +8,13 @@ import { DateService } from '../../services/date.service';
     styleUrls: [ './header.component.less' ],
 } )
 export class HeaderComponent {
+    private readonly timePeriodRegExp = '/day|week|month/';
     private modeCalendar: string;
 
     constructor( private router: Router, private dateService: DateService ) {
         this.router.events.subscribe( ( event ) => {
             if ( event instanceof NavigationEnd ) {
-                this.modeCalendar = event.urlAfterRedirects.match( /day|week|month/ )[ 0 ];
+                this.modeCalendar = event.urlAfterRedirects.match( this.timePeriodRegExp)[ 0 ];
             }
         } );
     }

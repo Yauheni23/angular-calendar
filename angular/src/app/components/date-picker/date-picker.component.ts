@@ -14,19 +14,19 @@ export class DatePickerComponent implements OnInit {
     @Input() private defaultDate?: Date;
     private displayedDate: Date;
 
-    constructor(private dateService: DateService) {
+    constructor(private _dateService: DateService) {
     }
 
     public ngOnInit() {
-        this.dateService.date = this.defaultDate || new Date();
-        this.dateService.cast.subscribe(date => {
+        this._dateService.date = this.defaultDate || new Date();
+        this._dateService.cast.subscribe(date => {
             this.displayedDate = date;
             this.changeDate.emit(this.displayedDate);
         });
     }
 
     public selectDate(date: string): void {
-        this.dateService.setDateFromString(date);
+        this._dateService.setDateFromString(date);
     }
 
     public toggleCalendar(): void {

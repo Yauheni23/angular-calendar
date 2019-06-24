@@ -39,3 +39,11 @@ export const tasksDefault: Task[] = [ {
     endDate: new Date(2019, 5, 20, 10, 30),
 },
 ];
+
+export enum Class {
+    Today = ' today'
+}
+
+export enum Color {
+    Gray = 'gray'
+}

@@ -4,7 +4,7 @@ export const calendar = {
     MONTH: [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ],
     DAYS_OF_WEEK: [ 'Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat' ],
     MODES: ['month', 'week', 'day']
-};
+}
 
 export const size = {
     heightHour: 48,

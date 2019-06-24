@@ -1,0 +1,8 @@
+<div class="days-of-week">
+  <div *ngFor="let day of daysOfWeek; index as indexDay"
+       class="days-of-week__day"
+       [style.color]="indexDay === 0 || indexDay === 6 ? 'red' : 'black'"
+  >
+    {{day}}
+  </div>
+</div>

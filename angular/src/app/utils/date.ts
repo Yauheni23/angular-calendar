@@ -1,4 +1,5 @@
 import { modes } from '../constants';
+import { Task } from '../models/task';
 
 export function getCountDaysInMonth(date) {
     return 33 - new Date(date.getFullYear(), date.getMonth(), 33).getDate();
@@ -100,4 +101,12 @@ export function createTimeMenu() {
     }
 
     return timeMenu;
+}
+
+
+export function isTaskForSeveralDays(task: Task, date: Date ) {
+    return convertInFormatInput(task.startDate) <= convertInFormatInput(date)
+        && convertInFormatInput(date) <= convertInFormatInput(task.endDate)
+        && convertInFormatInput(task.startDate) !== convertInFormatInput(task.endDate)
+        && (date.getDay() === 0 || convertInFormatInput(task.startDate) === convertInFormatInput(date));
 }

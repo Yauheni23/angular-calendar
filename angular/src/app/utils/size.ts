@@ -1,4 +1,5 @@
 import { Task } from '../models/task';
+import { convertInFormatInput } from './date';
 
 export function considerSize( tasks: Task[] ) {
     const matrix = createMatrix( tasks );
@@ -56,8 +57,8 @@ export function considerTop( tasks: Task[][], date: Date ) {
 
     let maxSize = 0;
     for ( const size in topTasks ) {
-        if ( maxSize < topTasks[ size ] ) {
-            maxSize = topTasks[ size ];
+        if ( maxSize < topTasks[ size ] + 1 ) {
+            maxSize = topTasks[ size ] + 1;
         }
     }
 
@@ -87,3 +88,17 @@ export function createMatrixTop( tasks: Task[][], date: Date ) {
     return matrix;
 }
 
+export function considerWidth( task: Task, displayedDate: Date ) {
+    let start = 6;
+    if ( convertInFormatInput( task.startDate ) <= convertInFormatInput( displayedDate ) ) {
+        start = displayedDate.getDay();
+    }
+
+    let end = task.endDate.getDay();
+    if ( convertInFormatInput( new Date( displayedDate.setDate( displayedDate.getDate() + ( 6 - displayedDate.getDay() ) ) ) )
+        <= convertInFormatInput( task.endDate ) ) {
+        end = 6;
+    }
+
+    return 100 * ( end - start + 1 );
+}

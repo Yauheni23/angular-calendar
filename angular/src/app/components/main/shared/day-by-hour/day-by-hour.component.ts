@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { size } from '../../../../constants';
 
 @Component({
@@ -6,13 +6,8 @@ import { size } from '../../../../constants';
   templateUrl: './day-by-hour.component.html',
   styleUrls: ['./day-by-hour.component.less']
 })
-export class DayByHourComponent implements OnInit {
+export class DayByHourComponent {
   public heightDay = size.heightDay;
   public heightHour = size.heightHour;
-  public countBlock = new Array(24)
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+  public countBlock = new Array(24);
 }

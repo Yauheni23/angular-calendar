@@ -28,6 +28,9 @@ import { TaskForMonthComponent } from './components/main/shared/task-for-month/t
 import { TaskForSeveralDaysComponent } from './components/main/shared/task-for-several-days/task-for-several-days.component';
 import { DialogComponent } from './components/dialog/dialog/dialog.component';
 import { ChangerDateComponent } from './components/header/changer-date/changer-date.component';
+import { DaysOfWeekComponent } from './components/main/shared/days-of-week/days-of-week.component';
+import { ContainerDayComponent } from './components/main/shared/container-day/container-day.component';
+import { LinkToDayComponent } from './components/main/shared/link-to-day/link-to-day.component';
 
 
 @NgModule( {
@@ -51,6 +54,9 @@ import { ChangerDateComponent } from './components/header/changer-date/changer-d
         TaskForSeveralDaysComponent,
         DialogComponent,
         ChangerDateComponent,
+        DaysOfWeekComponent,
+        ContainerDayComponent,
+        LinkToDayComponent,
     ],
     imports: [
         BrowserModule,

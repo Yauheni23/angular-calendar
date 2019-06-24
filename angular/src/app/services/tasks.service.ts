@@ -8,30 +8,34 @@ import { tasksDefault } from '../components/main/constants';
 } )
 
 export class TasksService {
-    public tasks: Task[];
-    private data: BehaviorSubject<Task[]>;
     public cast: Observable<Task[]>;
+    private data: BehaviorSubject<Task[]>;
+    private _tasks: Task[];
 
     constructor() {
-        this.tasks = tasksDefault;
-        this.data = new BehaviorSubject<Task[]>( this.tasks );
+        this._tasks = tasksDefault;
+        this.data = new BehaviorSubject<Task[]>( this._tasks );
         this.cast = this.data.asObservable();
     }
 
     public createTask( task: Task ): void {
-        const id = this.tasks.findIndex( taskStorage =>  taskStorage.id === task.id);
+        const id = this._tasks.findIndex( taskStorage =>  taskStorage.id === task.id);
         if ( id !== -1) {
-            this.tasks[ id ] = task;
+            this._tasks[ id ] = task;
         } else {
-            this.tasks.push( task );
+            this._tasks.push( task );
         }
-        this.data.next( this.tasks );
+        this.data.next( this._tasks );
     }
 
     public deleteTask( id: string ): void {
-        this.tasks = this.tasks.filter( task => {
+        this._tasks = this._tasks.filter( task => {
             return task.id !== id;
         } );
-        this.data.next( this.tasks );
+        this.data.next( this._tasks );
+    }
+
+    public get tasks(): Task[] {
+        return this._tasks;
     }
 }

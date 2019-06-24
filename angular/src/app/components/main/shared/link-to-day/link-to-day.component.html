@@ -1,0 +1,7 @@
+<a routerLink="/day"
+   (click)="$event.stopPropagation(); selectDay(day)"
+   [class]="'link-to-day' + isToday(day)"
+   [style.color]="isCurrentMonth(day)"
+>
+    {{getDate(day).getDate() + ' ' + getMonthName(day)}}
+</a>

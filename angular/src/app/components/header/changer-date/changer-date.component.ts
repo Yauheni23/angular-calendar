@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { calendar } from '../../../constants';
 import { DateService } from '../../../services/date.service';
-import { eventListener } from '../../constants';
+import { eventListener, keyBoard } from '../../constants';
 import { changeDate } from '../../../utils/date';
 
 @Component({
@@ -40,11 +40,11 @@ export class ChangerDateComponent {
         this._dateService.setDisplayedDate(this.displayedDate);
     }
 
-    private addKeyboardEvent = (event: KeyboardEvent) => {
-        if (event.key === 'ArrowLeft') {
+    private addKeyboardEvent = (event: KeyboardEvent): void => {
+        if (event.key === keyBoard.ArrowLeft) {
             this.changeDisplayedDate(true);
         }
-        if (event.key === 'ArrowRight') {
+        if (event.key === keyBoard.ArrowRight) {
             this.changeDisplayedDate(false);
         }
     }

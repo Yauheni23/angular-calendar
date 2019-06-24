@@ -1,42 +1,29 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { size } from '../../../../constants';
+import { size, Time } from '../../../../constants';
 import { Task } from '../../../../models/task';
 import { ViewService } from '../../../../services/view.service';
 
-@Component( {
+@Component({
     selector: 'app-task',
     templateUrl: './task.component.html',
     styleUrls: [ './task.component.less' ],
-} )
+})
 export class TaskComponent implements OnInit {
+    public readonly heightHour = size.heightHour;
+    public readonly MINUTES_IN_HOUR = 60;
     @Input() public task: Task;
-    @Input() public displayedDate: Date;
     @Input() public left: number;
     @Input() public width: number;
-    public heightHour = size.heightHour;
-    private top: number;
-    private height: number;
+    public top: number;
+    public height: number;
 
     constructor(private _viewService: ViewService) {
     }
 
     public ngOnInit() {
-        this.top = 0;
-        if ( this.displayedDate.toDateString() === this.task.startDate.toDateString() ) {
-            this.top = ( this.task.startDate.getHours() + this.task.startDate.getMinutes() / 60 ) * this.heightHour;
-            if ( this.displayedDate.toDateString() === this.task.endDate.toDateString() ) {
-                this.height = ( ( +this.task.endDate - +this.task.startDate ) / 1800000 | 0 ) * this.heightHour / 2 || this.heightHour / 2;
-            } else {
-                this.height = this.heightHour * 24 - this.top;
-            }
-        } else {
-            if ( this.displayedDate.toDateString() === this.task.endDate.toDateString() ) {
-                this.height = ( this.task.endDate.getHours() + this.task.endDate.getMinutes() / 60 ) * this.heightHour
-                    || this.heightHour / 2;
-            } else {
-                this.height = this.heightHour * 24;
-            }
-        }
+        this.top = (this.task.startDate.getHours() + this.task.startDate.getMinutes() / this.MINUTES_IN_HOUR) * this.heightHour;
+        this.height = ((+this.task.endDate - +this.task.startDate) / (Time.HourInMilliseconds / 2) | 0) * this.heightHour / 2
+            || this.heightHour / 2;
     }
 
     public showViewTask(): void {

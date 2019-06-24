@@ -1,66 +1,73 @@
 import { Component, OnInit } from '@angular/core';
-import { calendar, size } from '../../../constants';
-import { getTimeZone } from '../../../utils/date';
-import { DialogActions } from '../shared/dialog.actions';
-import { DateService } from '../../../services/date.service';
-import { TasksService } from '../../../services/tasks.service';
+import { calendar } from '../../../constants';
+import { convertInFormatInput } from '../../../utils/date';
+import { TimePeriod } from '../shared/timePeriod';
 import { Task } from '../../../models/task';
 import { considerSize } from '../../../utils/size';
-import { EditorService } from '../../../services/editor.service';
+import { DateService } from '../../../services/date.service';
+import { TasksService } from '../../../services/tasks.service';
+import { Class } from '../constants';
 
-@Component( {
+@Component({
     selector: 'app-day',
     templateUrl: './day.component.html',
     styleUrls: [ './day.component.less' ],
-} )
+})
 
-export class DayComponent extends DialogActions implements OnInit {
-    public timeZone = getTimeZone();
-    private heightDay = size.heightDay;
+export class DayComponent extends TimePeriod implements OnInit {
     public today: number | undefined;
     public tasks: Task[];
     public tasksForSeveralDays: Task[];
     public size: any;
 
-    constructor( private dateService: DateService, private tasksService: TasksService, private _editorService: EditorService ) {
+    constructor(private dateService: DateService, private tasksService: TasksService) {
         super();
-        this.dateService.cast.subscribe( date => {
+    }
+
+    public ngOnInit() {
+        this.dateService.cast.subscribe(date => {
             this.displayedDate = date;
-            this.today = this.displayedDate.getFullYear() === new Date().getFullYear()
-            && this.displayedDate.getMonth() === new Date().getMonth() ? new Date().getDate() : undefined;
-
-            this.tasksService.cast.subscribe( data => {
-                this.tasks = data.filter( task => {
-                    return this.displayedDate.toDateString() === task.startDate.toDateString()
-                        && this.displayedDate.toDateString() === task.endDate.toDateString();
-                } );
-                this.tasksForSeveralDays = data.filter( task => {
-                    return task.startDate.toDateString() !== task.endDate.toDateString()
-                        && +task.startDate <= new Date(this.displayedDate).setHours(24)
-                        && +task.endDate >= new Date(this.displayedDate).setHours(0, 0, 0, 0);
-                } );
-                this.tasks.sort( ( a, b ) => {
-                    return ( b.endDate.getHours() - b.startDate.getHours() ) - ( a.endDate.getHours() - a.startDate.getHours() );
-                } );
-
-                this.size = considerSize( this.tasks );
-            } );
-        } );
+            this.sortTask();
+        });
+        this.tasksService.cast.subscribe(data => {
+            this.tasks = data;
+            this.sortTask();
+        });
     }
 
-    ngOnInit() {
+    public get dayOfWeek(): string {
+        return calendar.DAYS_OF_WEEK[this.displayedDate.getDay()];
     }
 
-    getDayOfWeek() {
-        return calendar.DAYS_OF_WEEK[ this.displayedDate.getDay() ];
-    }
-
-    getDate() {
+    public get day(): number {
         return this.displayedDate.getDate();
     }
 
-    public showEditorTask = ( event: MouseEvent ): void => {
-        this._editorService.show();
-        this.displayedDate.setHours( event.offsetY / size.heightHour | 0 );
-    };
+    public isToday(): string {
+        return convertInFormatInput(this.getDate(this.day)) === this.todayString ? Class.Today : '';
+    }
+
+    private sortTask(): void {
+        this.selectTaskForSeveralDays();
+        this.selectTaskForDay();
+        this.size = considerSize(this.tasks);
+    }
+
+    private selectTaskForSeveralDays(): void {
+        this.tasksForSeveralDays = this.tasks.filter(task => {
+            return task.startDate.toDateString() !== task.endDate.toDateString()
+                && +task.startDate <= new Date(this.displayedDate).setHours(24)
+                && +task.endDate >= new Date(this.displayedDate).setHours(0, 0, 0, 0);
+        });
+    }
+
+    private selectTaskForDay(): void {
+        this.tasks = this.tasks.filter(task => {
+            return this.displayedDate.toDateString() === task.startDate.toDateString()
+                && this.displayedDate.toDateString() === task.endDate.toDateString();
+        }).sort((current, next) => {
+            return (next.endDate.getHours() - next.startDate.getHours()) - (current.endDate.getHours() - current.startDate.getHours());
+        });
+    }
+
 }
