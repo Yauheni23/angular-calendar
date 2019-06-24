@@ -28,11 +28,6 @@ export const tasksDefault: Task[] = [ {
     startDate: new Date(date.setHours(2, 0)),
     endDate: new Date(date.setHours(4, 0)),
 }, {
-    id: '8',
-    name: 'Error2',
-    startDate: new Date(date.setHours(0, 0)),
-    endDate: new Date(date.setHours(1, 0)),
-}, {
     id: '9',
     name: 'Error2',
     startDate: new Date(2019, 5, 10, 5, 0),

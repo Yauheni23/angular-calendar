@@ -16,7 +16,7 @@ import { Class } from '../constants';
 
 export class DayComponent extends TimePeriod implements OnInit {
     public today: number | undefined;
-    public tasks: Task[];
+    public tasks: Task[] = [];
     public tasksForSeveralDays: Task[];
     public size: any;
 
