@@ -20,16 +20,17 @@ export class DayComponent extends TimePeriod implements OnInit {
     public tasksForSeveralDays: Task[];
     public size: any;
 
-    constructor(private dateService: DateService, private tasksService: TasksService) {
+    constructor(private _dateService: DateService, private _tasksService: TasksService) {
         super();
     }
 
     public ngOnInit() {
-        this.dateService.cast.subscribe(date => {
+        this._dateService.cast.subscribe(date => {
             this.displayedDate = date;
+            this.tasks = this._tasksService.tasks;
             this.sortTask();
         });
-        this.tasksService.cast.subscribe(data => {
+        this._tasksService.cast.subscribe(data => {
             this.tasks = data;
             this.sortTask();
         });

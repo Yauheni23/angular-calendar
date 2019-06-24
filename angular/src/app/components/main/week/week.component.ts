@@ -18,13 +18,13 @@ export class WeekComponent extends TimePeriod {
     public tasksByDays: Task[][] = [];
     public tasksForSeveralDays: Task[][];
 
-    constructor(private dateService: DateService, private tasksService: TasksService) {
+    constructor(private _dateService: DateService, private _tasksService: TasksService) {
         super();
-        this.dateService.cast.subscribe(date => {
+        this._dateService.cast.subscribe(date => {
             this.displayedDate = date;
             this.sortTask();
         });
-        this.tasksService.cast.subscribe(data => {
+        this._tasksService.cast.subscribe(data => {
             this.tasks = data;
             this.sortTask();
         });

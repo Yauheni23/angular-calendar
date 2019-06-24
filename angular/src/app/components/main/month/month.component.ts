@@ -15,13 +15,13 @@ export class MonthComponent extends TimePeriod {
     public dateInMonth: number[][];
     public tasks: Task[];
 
-    constructor(private dateService: DateService, private tasksService: TasksService, private _editorService: EditorService) {
+    constructor(private _dateService: DateService, private _tasksService: TasksService, private _editorService: EditorService) {
         super();
-        this.dateService.cast.subscribe(date => {
+        this._dateService.cast.subscribe(date => {
             this.displayedDate = date;
             this.dateInMonth = getDaysInMonth(this.displayedDate);
         });
-        this.tasksService.cast.subscribe(data => {
+        this._tasksService.cast.subscribe(data => {
             this.tasks = data.sort((currentValue, nextValue) => {
                 return currentValue.startDate.getHours() - nextValue.startDate.getHours();
             });
@@ -43,7 +43,7 @@ export class MonthComponent extends TimePeriod {
     }
 
     public selectDay(day: number, hour?: number) {
-        this.dateService.setDisplayedDate(new Date(
+        this._dateService.setDisplayedDate(new Date(
             this.displayedDate.getFullYear(),
             this.displayedDate.getMonth(),
             day,
