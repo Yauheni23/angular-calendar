@@ -9,13 +9,15 @@
 
 # dependencies
 /angular/node_modules
+/backend/node_modules
 
 # profiling files
 /angular/chrome-profiler-events.json
 /angular/speed-measure-plugin.json
 
 # IDEs and editors
-/.idea
+/angular/.idea
+/backend/.idea
 .project
 .classpath
 .c9/
@@ -36,3 +38,6 @@
 # System Files
 .DS_Store
 Thumbs.db
+
+/backend/package-lock.json
+/angular/package-lock.json
