@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { getArrayDaysInWeek, isTaskForSeveralDays } from '../../../utils/date';
+import { getArrayDaysInWeek } from '../../../utils/date';
 import { TimePeriod } from '../shared/timePeriod';
 import { Task } from '../../../models/task';
 import { considerSize, considerTop } from '../../../utils/size';
@@ -12,21 +12,21 @@ import { TasksService } from '../../../services/tasks.service';
     styleUrls: [ './week.component.less' ],
 })
 export class WeekComponent extends TimePeriod {
-    public tasks: Task[] = [];
     public size: any[] = new Array(7);
     public top: any;
-    public tasksByDays: Task[][] = [];
+    public tasksByDays: Task[][];
     public tasksForSeveralDays: Task[][];
 
     constructor(private _dateService: DateService, private _tasksService: TasksService) {
         super();
         this._dateService.cast.subscribe(date => {
             this.displayedDate = date;
-            this.sortTask();
+            this.getTasksByDays();
+            this.considerSize();
         });
-        this._tasksService.cast.subscribe(data => {
-            this.tasks = data;
-            this.sortTask();
+        this._tasksService.cast.subscribe(() => {
+            this.getTasksByDays();
+            this.considerSize();
         });
     }
 
@@ -38,37 +38,17 @@ export class WeekComponent extends TimePeriod {
         return this.getDate(getArrayDaysInWeek(this.displayedDate)[dayOfWeek]);
     }
 
-    private getTasksByDays(): Task[][] {
-        const tasksByDays = [];
+    private getTasksByDays(): void {
+        this.tasksByDays = [];
+        this.tasksForSeveralDays = [];
 
         this.dateOfWeek.forEach(day => {
-            tasksByDays.push(this.tasks.filter(task => {
-                return task.startDate.toDateString() === this.getDate(day).toDateString()
-                    && task.startDate.toDateString() === task.endDate.toDateString();
-            }));
+            this.tasksByDays.push(this._tasksService.getTaskForDay(this.getDate(day)));
+            this.tasksForSeveralDays.push(this._tasksService.getTaskForSeveralDaysOfWeek(this.getDate(day)));
         });
-
-        return tasksByDays;
     }
 
-    private getTasksForSeveralDays(): Task[][] {
-        const tasksForSeveralDays = [];
-
-        this.dateOfWeek.forEach(day => {
-            tasksForSeveralDays.push(this.tasks.filter(task =>
-                isTaskForSeveralDays(task, this.getDate(day)),
-            ));
-        });
-
-        return tasksForSeveralDays;
-    }
-
-    private sortTask(): void {
-        this.tasks.sort((a, b) => {
-            return (b.endDate.getHours() - b.startDate.getHours()) - (a.endDate.getHours() - a.startDate.getHours());
-        });
-        this.tasksByDays = this.getTasksByDays();
-        this.tasksForSeveralDays = this.getTasksForSeveralDays();
+    private considerSize(): void {
         for (let i = 0; i < 7; i++) {
             this.size[i] = considerSize(this.tasksByDays[i]);
         }

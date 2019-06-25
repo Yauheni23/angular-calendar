@@ -21,3 +21,7 @@ export enum modes {
     Week = 'week',
     Day = 'day',
 }
+
+export enum server {
+    address = 'http://172.18.144.5:3000'
+}

@@ -107,6 +107,5 @@ export function createTimeMenu() {
 export function isTaskForSeveralDays(task: Task, date: Date ) {
     return convertInFormatInput(task.startDate) <= convertInFormatInput(date)
         && convertInFormatInput(date) <= convertInFormatInput(task.endDate)
-        && convertInFormatInput(task.startDate) !== convertInFormatInput(task.endDate)
-        && (date.getDay() === 0 || convertInFormatInput(task.startDate) === convertInFormatInput(date));
+        && convertInFormatInput(task.startDate) !== convertInFormatInput(task.endDate);
 }
