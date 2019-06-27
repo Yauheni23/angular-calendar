@@ -1,7 +1,4 @@
 const env = {
-  database: 'calendar_dev',
-  username: 'admin',
-  password: 'password',
   host: 'localhost',
   dialect: 'mysql',
   pool: {

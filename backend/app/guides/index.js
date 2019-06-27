@@ -5,16 +5,24 @@ const isGuideCorrect = require('../validators/guide').isGuideCorrect;
 exports.getAllGuides = (req, res) => {
     Guide.findAll(options).then((data) => {
         res.send(data);
+    }).catch(err => {
+        res.send({
+            error: err.message
+        })
     })
 }
 
 exports.getGuideById = (req, res) => {
     Guide.findOne({ ...options,
         where: {
-            id: req.query.id
+            id: req.query.id || 1
         }}).then((data) => {
             res.send(data);
+        }).catch(err => {
+        res.send({
+            error: err.message
         })
+    })
 }
 
 exports.createGuide = (req, res) => {
