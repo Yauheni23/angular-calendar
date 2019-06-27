@@ -1,7 +1,7 @@
 import { modes } from '../constants';
 import { Task } from '../models/task';
 
-export function getCountDaysInMonth(date) {
+export function getCountDaysInMonth(date): number {
     return 33 - new Date(date.getFullYear(), date.getMonth(), 33).getDate();
 }
 
@@ -33,7 +33,7 @@ export function getArrayDaysInWeek(date: Date): number[] {
     return arrayDaysInWeek;
 }
 
-export function getTimeZone() {
+export function getTimeZone(): string {
     const timeZone = new Date().getTimezoneOffset() / 60 * -1 + '';
     if (+timeZone > -10 && +timeZone < 0) {
         return `${timeZone[0]}0${timeZone[1]}`;
@@ -48,11 +48,11 @@ export function getTimeZone() {
     return timeZone;
 }
 
-export function validateDateFromInput(date: string) {
+export function validateDateFromInput(date: string): boolean {
     return date.search(/[1-9][0-9]{3}-((0[0-9])|(1[0-2]))-(([0-2][0-9])|(3[0-1]))/) !== -1;
 }
 
-export function convertInFormatInput(date: Date) {
+export function convertInFormatInput(date: Date): string {
     let month = date.getMonth() + 1 + '';
     let day = date.getDate() + '';
     if (+month <= 9) {
@@ -83,7 +83,7 @@ export function changeDate(date: Date, mode: string, isPrev: boolean): void {
     }
 }
 
-export function createTimeMenu() {
+export function createTimeMenu(): string[] {
     const timeMenu: string[] = [];
 
     for ( let i = 0; i < 48; i++ ) {
@@ -104,7 +104,7 @@ export function createTimeMenu() {
 }
 
 
-export function isTaskForSeveralDays(task: Task, date: Date ) {
+export function isTaskForSeveralDays(task: Task, date: Date ): boolean {
     return convertInFormatInput(task.startDate) <= convertInFormatInput(date)
         && convertInFormatInput(date) <= convertInFormatInput(task.endDate)
         && convertInFormatInput(task.startDate) !== convertInFormatInput(task.endDate);

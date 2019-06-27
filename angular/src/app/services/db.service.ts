@@ -12,8 +12,8 @@ interface IResponseTask {
     providedIn: 'root',
 })
 export class DataBaseService {
-    private readonly guidesUrl = '/guides';
-    private readonly guideUrl = '/guide';
+    private readonly guidesUrl: string = '/guides';
+    private readonly guideUrl: string = '/guide';
 
     constructor(private http: HttpClient) { }
 

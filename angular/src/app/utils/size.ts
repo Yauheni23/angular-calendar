@@ -18,7 +18,7 @@ export function considerSize( tasks: Task[] ) {
     };
 }
 
-export function createMatrix( tasks: Task[] ) {
+export function createMatrix( tasks: Task[] ): string[][] {
     const matrix = new Array( 48 );
     for ( let i = 0; i < 48; i++ ) {
         matrix[ i ] = [];
@@ -68,7 +68,7 @@ export function considerTop( tasks: Task[][], date: Date ) {
     };
 }
 
-export function createMatrixTop( tasks: Task[][], date: Date ) {
+export function createMatrixTop( tasks: Task[][], date: Date ): string[][] {
     const matrix = new Array( 7 );
     for ( let i = 0; i < 7; i++ ) {
         matrix[ i ] = [];
@@ -88,7 +88,7 @@ export function createMatrixTop( tasks: Task[][], date: Date ) {
     return matrix;
 }
 
-export function considerWidth( task: Task, displayedDate: Date ) {
+export function considerWidth( task: Task, displayedDate: Date ): number {
     let start = 6;
     if ( convertInFormatInput( task.startDate ) <= convertInFormatInput( displayedDate ) ) {
         start = displayedDate.getDay();

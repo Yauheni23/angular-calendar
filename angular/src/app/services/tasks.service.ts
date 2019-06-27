@@ -9,11 +9,13 @@ import { convertInFormatInput, isTaskForSeveralDays } from '../utils/date';
 })
 
 export class TasksService {
-    private data: BehaviorSubject<Task[]> = new BehaviorSubject<Task[]>([]);
-    public cast: Observable<Task[]> = this.data.asObservable();
+    public cast: Observable<Task[]>;
+    private data: BehaviorSubject<Task[]>;
     private _tasks: Task[] = [];
 
     constructor(private _dbService: DataBaseService) {
+        this.data = new BehaviorSubject<Task[]>([]);
+        this.cast = this.data.asObservable();
         this._dbService.getTasks().subscribe(data => {
             this._tasks = data.payload.map((task: TaskResponse) => {
                 task.startDate = new Date(task.startDate);
@@ -71,6 +73,4 @@ export class TasksService {
             return date.getDay() === 0 || convertInFormatInput(task.startDate) === convertInFormatInput(date);
         });
     }
-
-
 }

@@ -5,10 +5,12 @@ import { BehaviorSubject, Observable } from 'rxjs';
     providedIn: 'root',
 } )
 export class DateService {
-    private data: BehaviorSubject<Date> = new BehaviorSubject<Date>(new Date());
-    public cast: Observable<Date> = this.data.asObservable();
+    public cast: Observable<Date>;
+    private data: BehaviorSubject<Date>;
 
     constructor() {
+        this.data = new BehaviorSubject<Date>(new Date());
+        this.cast = this.data.asObservable();
     }
 
     public setDisplayedDate( date: Date ): void {
