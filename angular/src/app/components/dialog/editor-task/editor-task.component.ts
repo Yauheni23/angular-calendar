@@ -15,15 +15,15 @@ export class EditorTaskComponent {
     public nameFormControl: FormControl;
     @ViewChildren('input') private input: any;
 
-    constructor(private _tasksService: TasksService, private _editorService: EditorService) {
-        this.task = this._editorService.initial();
+    constructor(private tasksService: TasksService, private editorService: EditorService) {
+        this.task = this.editorService.initial();
         this.nameFormControl = new FormControl(this.task.name, Validators.required);
     }
 
     public createTask(): void {
         if (this.nameFormControl.value && this.nameFormControl.value.trim()) {
-            this._tasksService.createTask(this.task);
-            this._editorService.hide();
+            this.tasksService.createTask(this.task);
+            this.editorService.hide();
         } else {
             this.nameFormControl.markAsTouched();
             this.input.first.nativeElement.focus();

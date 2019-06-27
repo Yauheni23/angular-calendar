@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Task } from '../models/task';
+import { Task, TaskResponse } from '../models/task';
 import { DataBaseService } from './db.service';
 import { convertInFormatInput, isTaskForSeveralDays } from '../utils/date';
 
@@ -15,17 +15,24 @@ export class TasksService {
 
     constructor(private _dbService: DataBaseService) {
         this._dbService.getTasks().subscribe(data => {
-            this._tasks = data.map((task: Task) => {
+            this._tasks = data.payload.map((task: TaskResponse) => {
                 task.startDate = new Date(task.startDate);
                 task.endDate = new Date(task.endDate);
                 return task;
-            });
-            this.data.next(data);
+            }) as Task[];
+            this.data.next(this._tasks);
         });
     }
 
+    private static checkValidationTask(task: Task): Task {
+        if (+task.startDate > +task.endDate) {
+            task.endDate = task.startDate;
+        }
+        return task;
+    }
+
     public createTask(newTask: Task): void {
-        this._dbService.createTask(newTask).subscribe(data => {
+        this._dbService.createTask(TasksService.checkValidationTask(newTask)).subscribe(data => {
             if (data.result) {
                 this._tasks.push(newTask);
                 this.data.next(this._tasks);
@@ -64,4 +71,6 @@ export class TasksService {
             return date.getDay() === 0 || convertInFormatInput(task.startDate) === convertInFormatInput(date);
         });
     }
+
+
 }

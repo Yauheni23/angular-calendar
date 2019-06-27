@@ -9,24 +9,25 @@ import { ViewService } from '../../../../services/view.service';
     styleUrls: [ './task.component.less' ],
 })
 export class TaskComponent implements OnInit {
-    public readonly heightHour = size.heightHour;
-    public readonly MINUTES_IN_HOUR = 60;
+    public readonly heightHour: number = size.heightHour;
+    public readonly MINUTES_IN_HOUR: number = 60;
     @Input() public task: Task;
     @Input() public left: number;
     @Input() public width: number;
     public top: number;
     public height: number;
 
-    constructor(private _viewService: ViewService) {
+    constructor(private viewService: ViewService) {
     }
 
-    public ngOnInit() {
+    public ngOnInit(): void {
         this.top = (this.task.startDate.getHours() + this.task.startDate.getMinutes() / this.MINUTES_IN_HOUR) * this.heightHour;
         this.height = ((+this.task.endDate - +this.task.startDate) / (Time.HourInMilliseconds / 2) | 0) * this.heightHour / 2
             || this.heightHour / 2;
     }
 
-    public showViewTask(): void {
-        this._viewService.show(this.task);
+    public showViewTask(event: MouseEvent): void {
+        this.viewService.show(this.task);
+        event.stopPropagation();
     }
 }

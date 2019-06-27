@@ -10,23 +10,24 @@ import { eventListener } from '../constants';
 })
 export class DatePickerComponent implements OnInit {
     public isVisible: boolean = false;
-    @Output() public changeDate = new EventEmitter();
+    @Output() public changeDate: EventEmitter<Date> = new EventEmitter();
     @Input() private defaultDate?: Date;
     private displayedDate: Date;
 
-    constructor(private _dateService: DateService) {
+    constructor(private dateService: DateService) {
+        this.hideCalendar = this.hideCalendar.bind(this);
     }
 
-    public ngOnInit() {
-        this._dateService.date = this.defaultDate || new Date();
-        this._dateService.cast.subscribe(date => {
+    public ngOnInit(): void {
+        this.dateService.date = this.defaultDate || new Date();
+        this.dateService.cast.subscribe(date => {
             this.displayedDate = date;
             this.changeDate.emit(this.displayedDate);
         });
     }
 
     public selectDate(date: string): void {
-        this._dateService.setDateFromString(date);
+        this.dateService.setDateFromString(date);
     }
 
     public toggleCalendar(): void {
@@ -38,7 +39,7 @@ export class DatePickerComponent implements OnInit {
         }
     }
 
-    public hideCalendar = (): void => {
+    public hideCalendar(): void  {
         document.removeEventListener(eventListener.MouseDown, this.hideCalendar);
         this.isVisible = false;
     }

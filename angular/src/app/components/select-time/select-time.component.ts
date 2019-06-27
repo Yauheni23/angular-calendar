@@ -15,7 +15,7 @@ export class SelectTimeComponent implements OnInit {
         this.times = createTimeMenu();
     }
 
-    public ngOnInit() {
+    public ngOnInit(): void {
         this.timeValue = this.timeDefault.getHours() * 2;
         this.setTime(this.timeValue);
     }

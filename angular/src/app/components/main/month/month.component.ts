@@ -15,35 +15,37 @@ export class MonthComponent extends TimePeriod {
     public dateInMonth: number[][];
     public tasks: Task[];
 
-    constructor(private _dateService: DateService, private _tasksService: TasksService, private _editorService: EditorService) {
+    constructor(private dateService: DateService, private tasksService: TasksService, private editorService: EditorService) {
         super();
-        this._dateService.cast.subscribe(date => {
+        this.dateService.cast.subscribe(date => {
             this.displayedDate = date;
             this.dateInMonth = getDaysInMonth(this.displayedDate);
         });
-        this._tasksService.cast.subscribe(data => {
+        this.tasksService.cast.subscribe(data => {
             this.tasks = data.sort((currentValue, nextValue) => {
                 return currentValue.startDate.getHours() - nextValue.startDate.getHours();
             });
         });
+        this.showEditor = this.showEditor.bind(this);
     }
 
     public getDate(day: number): Date {
         return new Date(this.displayedDate.getFullYear(), this.displayedDate.getMonth(), day);
     }
 
-    public getTasksForDay(day: number) {
+    public getTasksForDay(day: number): Task[] {
         return this.tasks.filter(task => {
             return task.startDate.toDateString() === this.getDate(day).toDateString();
         });
     }
 
-    public showEditor = () => {
-        this._editorService.show();
+    public showEditor(day: number): void {
+        this.editorService.show();
+        this.selectDay(day);
     }
 
-    public selectDay(day: number, hour?: number) {
-        this._dateService.setDisplayedDate(new Date(
+    public selectDay(day: number, hour?: number): void {
+        this.dateService.setDisplayedDate(new Date(
             this.displayedDate.getFullYear(),
             this.displayedDate.getMonth(),
             day,

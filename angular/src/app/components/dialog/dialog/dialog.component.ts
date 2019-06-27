@@ -9,19 +9,21 @@ import { ViewService } from '../../../services/view.service';
     styleUrls: [ './dialog.component.less' ],
 })
 export class DialogComponent implements OnInit {
-    constructor(private _editorService: EditorService, private _viewService: ViewService) {}
+    constructor(private editorService: EditorService, private viewService: ViewService) {
+        this.closeDialogEscape = this.closeDialogEscape.bind(this);
+    }
 
-    public ngOnInit() {
+    public ngOnInit(): void {
         document.addEventListener(eventListener.KeyDown, this.closeDialogEscape);
     }
 
     public closeDialog(): void {
-        this._editorService.hide();
-        this._viewService.hide();
+        this.editorService.hide();
+        this.viewService.hide();
         document.removeEventListener(eventListener.KeyDown, this.closeDialogEscape);
     }
 
-    private closeDialogEscape = (event: KeyboardEvent): void => {
+    private closeDialogEscape(event: KeyboardEvent): void {
         if (event.key === keyBoard.Escape) {
             this.closeDialog();
         }

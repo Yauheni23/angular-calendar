@@ -2,26 +2,26 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { calendar } from '../../../constants';
 import { convertInFormatInput, getDaysInMonth } from '../../../utils/date';
 import { DateService } from '../date.service';
+import { Class, Color } from '../../main/constants';
 
 @Component({
     selector: 'app-calendar',
     templateUrl: './calendar.component.html',
     styleUrls: [ './calendar.component.less' ],
 })
-
 export class CalendarComponent implements OnInit {
     public readonly todayString: string;
     public readonly months = calendar.MONTH_SHORT;
     public readonly dayOfWeek = calendar.DAYS_OF_WEEK_SHORT;
-    @Input() private readonly displayedDate: Date;
-    @Output() public hideCalendar = new EventEmitter();
     public date: Date;
+    @Output() public hideCalendar = new EventEmitter();
+    @Input() private readonly displayedDate: Date;
 
-    constructor(private _dateService: DateService) {
+    constructor(private dateService: DateService) {
         this.todayString = convertInFormatInput(new Date());
     }
 
-    public ngOnInit() {
+    public ngOnInit(): void {
         this.date = new Date(this.displayedDate);
     }
 
@@ -45,8 +45,8 @@ export class CalendarComponent implements OnInit {
         this.date.setFullYear(+(event.target as HTMLInputElement).value);
     }
 
-    public changeDate(day: number) {
-        this._dateService.date = new Date(this.date.getFullYear(), this.date.getMonth(), day);
+    public changeDate(day: number): void {
+        this.dateService.date = new Date(this.date.getFullYear(), this.date.getMonth(), day);
         this.hideCalendar.emit();
     }
 
@@ -55,11 +55,11 @@ export class CalendarComponent implements OnInit {
     }
 
     public isToday(day: number): string {
-        return convertInFormatInput(new Date(this.date.getFullYear(), this.date.getMonth(), day)) === this.todayString ? ' today' : '';
+        return convertInFormatInput(new Date(this.date.getFullYear(), this.date.getMonth(), day)) === this.todayString ? Class.Today : '';
     }
 
     public isCurrentMonth(dayOfWeek: number): string {
-        return this.month !== this.getDate(dayOfWeek).getMonth() ? 'gray' : '';
+        return this.month !== this.getDate(dayOfWeek).getMonth() ? Color.Gray : '';
     }
 
     private getDate(day: number): Date {

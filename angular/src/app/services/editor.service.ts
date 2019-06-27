@@ -9,12 +9,12 @@ import { Time } from '../constants';
     providedIn: 'root',
 })
 export class EditorService extends DialogService {
-    constructor(private _dateService: DateService) {
+    constructor(private dateService: DateService) {
         super();
     }
 
     public get date(): Date {
-        return this._dateService.date;
+        return this.dateService.date;
     }
 
     public initial(): Task {

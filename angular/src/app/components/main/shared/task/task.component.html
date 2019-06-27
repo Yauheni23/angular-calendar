@@ -3,7 +3,7 @@
      [style.width.%]="width"
      [style.height.px]="height"
      class="task-day"
-     (click)="showViewTask();$event.stopPropagation()"
+     (click)="showViewTask($event)"
 >
     <p class="task-day__text">
         {{task.name}}

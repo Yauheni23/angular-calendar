@@ -13,19 +13,18 @@ import { Class } from '../constants';
     templateUrl: './day.component.html',
     styleUrls: [ './day.component.less' ],
 })
-
 export class DayComponent extends TimePeriod {
     public tasks: Task[] = [];
     public tasksForSeveralDays: Task[];
     public size: any;
 
-    constructor(private _dateService: DateService, private _tasksService: TasksService) {
+    constructor(private dateService: DateService, private tasksService: TasksService) {
         super();
-        this._dateService.cast.subscribe(data => {
+        this.dateService.cast.subscribe(data => {
             this.displayedDate = data;
             this.getTasks();
         });
-        this._tasksService.cast.subscribe(() => {
+        this.tasksService.cast.subscribe(() => {
             this.getTasks();
         });
     }
@@ -43,8 +42,8 @@ export class DayComponent extends TimePeriod {
     }
 
     private getTasks(): void {
-        this.tasks = this._tasksService.getTaskForDay(this.displayedDate);
-        this.tasksForSeveralDays = this._tasksService.getTaskForSeveralDays(this.displayedDate);
+        this.tasks = this.tasksService.getTaskForDay(this.displayedDate);
+        this.tasksForSeveralDays = this.tasksService.getTaskForSeveralDays(this.displayedDate);
         this.size = considerSize(this.tasks);
     }
 }

@@ -14,8 +14,8 @@ export class ChangerDateComponent {
     @Input() private selectedMode: string;
     private displayedDate: Date;
 
-    constructor(private _dateService: DateService) {
-        this._dateService.cast.subscribe(data => this.displayedDate = new Date(data));
+    constructor(private dateService: DateService) {
+        this.dateService.cast.subscribe(data => this.displayedDate = new Date(data));
         document.addEventListener(eventListener.KeyDown, this.addKeyboardEvent);
     }
 
@@ -28,16 +28,16 @@ export class ChangerDateComponent {
     }
 
     public setMonth(event: Event): void {
-        this._dateService.setDisplayedDate(new Date(this.displayedDate.setMonth(+(event.target as HTMLSelectElement).value)));
+        this.dateService.setDisplayedDate(new Date(this.displayedDate.setMonth(+(event.target as HTMLSelectElement).value)));
     }
 
     public setFullYear(event: Event): void {
-        this._dateService.setDisplayedDate(new Date(this.displayedDate.setFullYear(+(event.target as HTMLInputElement).value)));
+        this.dateService.setDisplayedDate(new Date(this.displayedDate.setFullYear(+(event.target as HTMLInputElement).value)));
     }
 
     public changeDisplayedDate(isPrev: boolean): void {
         changeDate(this.displayedDate, this.selectedMode, isPrev);
-        this._dateService.setDisplayedDate(this.displayedDate);
+        this.dateService.setDisplayedDate(this.displayedDate);
     }
 
     private addKeyboardEvent = (event: KeyboardEvent): void => {

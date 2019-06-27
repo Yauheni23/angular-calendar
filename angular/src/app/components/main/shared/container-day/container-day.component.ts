@@ -15,8 +15,8 @@ export class ContainerDayComponent implements OnInit {
     public displayedDate: Date;
     @Input() private day: number;
 
-    constructor(private _dateService: DateService, private _editorService: EditorService) {
-        this._dateService.cast.subscribe(data => {
+    constructor(private dateService: DateService, private editorService: EditorService) {
+        this.dateService.cast.subscribe(data => {
             this.displayedDate = data;
         });
     }
@@ -25,11 +25,11 @@ export class ContainerDayComponent implements OnInit {
     }
 
     public showEditor = () => {
-        this._editorService.show();
+        this.editorService.show();
     }
 
     public selectDay(hour?: number) {
-        this._dateService.setDisplayedDate(new Date(
+        this.dateService.setDisplayedDate(new Date(
             this.displayedDate.getFullYear(),
             this.displayedDate.getMonth(),
             this.day,

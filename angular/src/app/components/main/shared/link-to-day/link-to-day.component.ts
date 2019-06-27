@@ -14,12 +14,12 @@ export class LinkToDayComponent {
     public displayedDate: Date;
     @Input() private day: number;
 
-    constructor(private _dateService: DateService) {
-        this._dateService.cast.subscribe(data => this.displayedDate = data);
+    constructor(private dateService: DateService) {
+        this.dateService.cast.subscribe(data => this.displayedDate = data);
     }
 
     public selectDay(day: number): void {
-        this._dateService.setDisplayedDate(new Date(
+        this.dateService.setDisplayedDate(new Date(
             this.displayedDate.getFullYear(),
             this.displayedDate.getMonth(),
             day,

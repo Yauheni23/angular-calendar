@@ -8,7 +8,7 @@ import { DateService } from '../../services/date.service';
     styleUrls: [ './header.component.less' ],
 } )
 export class HeaderComponent {
-    private readonly timePeriodRegExp = /day|week|month/;
+    private readonly timePeriodRegExp: RegExp = /day|week|month/;
     private modeCalendar: string;
 
     constructor( private router: Router, private dateService: DateService ) {

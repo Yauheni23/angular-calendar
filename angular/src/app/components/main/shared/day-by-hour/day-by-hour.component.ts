@@ -7,7 +7,7 @@ import { size } from '../../../../constants';
   styleUrls: ['./day-by-hour.component.less']
 })
 export class DayByHourComponent {
-  public heightDay = size.heightDay;
-  public heightHour = size.heightHour;
-  public countBlock = new Array(24);
+  public heightDay: number = size.heightDay;
+  public heightHour: number = size.heightHour;
+  public countBlock: void[] = new Array(24);
 }

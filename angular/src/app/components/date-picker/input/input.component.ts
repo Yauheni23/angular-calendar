@@ -10,14 +10,14 @@ import { MyErrorStateMatcher } from '../../../utils/errors';
     styleUrls: [ './input.component.less' ],
 } )
 export class InputComponent {
-    private readonly MAX_LENGTH_STRING_DATE: number = 10;
-    @Input() private readonly displayedDate: Date;
-    @Output() public changeDisplayedDate: EventEmitter<string> = new EventEmitter();
     public matcher = new MyErrorStateMatcher();
     public dateFormControl: FormControl = new FormControl( this.date, [
         Validators.required,
         DateStringValidator,
     ] );
+    @Output() public changeDisplayedDate: EventEmitter<string> = new EventEmitter();
+    @Input() private readonly displayedDate: Date;
+    private readonly MAX_LENGTH_STRING_DATE: number = 10;
 
     public get date(): string {
         return convertInFormatInput( this.displayedDate || new Date() );

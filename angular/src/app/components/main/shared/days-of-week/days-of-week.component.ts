@@ -7,5 +7,5 @@ import { calendar } from '../../../../constants';
   styleUrls: ['./days-of-week.component.less']
 })
 export class DaysOfWeekComponent {
-  public readonly daysOfWeek = calendar.DAYS_OF_WEEK;
+  public readonly daysOfWeek: string[] = calendar.DAYS_OF_WEEK;
 }

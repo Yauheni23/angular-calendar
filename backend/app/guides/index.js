@@ -4,7 +4,9 @@ const isGuideCorrect = require('../validators/guide').isGuideCorrect;
 
 exports.getAllGuides = (req, res) => {
     Guide.findAll(options).then((data) => {
-        res.send(data);
+        res.send({
+            payload: data
+        });
     }).catch(err => {
         res.send({
             error: err.message

@@ -10,10 +10,11 @@ import { ViewService } from '../../../../services/view.service';
 export class TaskForMonthComponent {
     @Input() public task: Task;
 
-    constructor(private _viewService: ViewService) {
+    constructor(private viewService: ViewService) {
     }
 
-    public showTask(): void {
-        this._viewService.show(this.task);
+    public showTask(event: MouseEvent): void {
+        this.viewService.show(this.task);
+        event.stopPropagation();
     }
 }

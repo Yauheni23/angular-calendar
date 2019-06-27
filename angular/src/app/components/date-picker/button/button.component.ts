@@ -8,7 +8,8 @@ import { Component, EventEmitter, Output } from '@angular/core';
 export class ButtonComponent {
     @Output() public toggleCalendar = new EventEmitter();
 
-    public clickButton(): void {
+    public clickButton(event: MouseEvent): void {
         this.toggleCalendar.emit();
+        event.stopPropagation();
     }
 }

@@ -18,11 +18,11 @@ export class TaskForSeveralDaysComponent implements OnInit {
     public rightSide: boolean;
     public width: number;
 
-    constructor(private _dateService: DateService, private _viewService: ViewService) {
+    constructor(private dateService: DateService, private viewService: ViewService) {
     }
 
-    public ngOnInit() {
-        this._dateService.cast.subscribe(date => {
+    public ngOnInit(): void {
+        this.dateService.cast.subscribe(date => {
             const week = getArrayDaysInWeek(this.displayedDate);
             this.leftSide = convertInFormatInput(this.task.startDate)
                 < convertInFormatInput(this.isWeek ? new Date(date.getFullYear(), date.getMonth(), week[0]) : date);
@@ -33,6 +33,6 @@ export class TaskForSeveralDaysComponent implements OnInit {
     }
 
     public showViewTask(): void {
-        this._viewService.show(this.task);
+        this.viewService.show(this.task);
     }
 }

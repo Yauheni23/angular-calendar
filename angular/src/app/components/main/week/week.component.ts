@@ -17,14 +17,14 @@ export class WeekComponent extends TimePeriod {
     public tasksByDays: Task[][];
     public tasksForSeveralDays: Task[][];
 
-    constructor(private _dateService: DateService, private _tasksService: TasksService) {
+    constructor(private dateService: DateService, private tasksService: TasksService) {
         super();
-        this._dateService.cast.subscribe(date => {
+        this.dateService.cast.subscribe(date => {
             this.displayedDate = date;
             this.getTasksByDays();
             this.considerSize();
         });
-        this._tasksService.cast.subscribe(() => {
+        this.tasksService.cast.subscribe(() => {
             this.getTasksByDays();
             this.considerSize();
         });
@@ -43,8 +43,8 @@ export class WeekComponent extends TimePeriod {
         this.tasksForSeveralDays = [];
 
         this.dateOfWeek.forEach(day => {
-            this.tasksByDays.push(this._tasksService.getTaskForDay(this.getDate(day)));
-            this.tasksForSeveralDays.push(this._tasksService.getTaskForSeveralDaysOfWeek(this.getDate(day)));
+            this.tasksByDays.push(this.tasksService.getTaskForDay(this.getDate(day)));
+            this.tasksForSeveralDays.push(this.tasksService.getTaskForSeveralDaysOfWeek(this.getDate(day)));
         });
     }
 

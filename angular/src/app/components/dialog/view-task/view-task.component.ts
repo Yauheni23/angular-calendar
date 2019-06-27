@@ -11,12 +11,12 @@ import { ViewService } from '../../../services/view.service';
 export class ViewTaskComponent {
     public task: Task;
 
-    constructor(private _tasksService: TasksService, private _viewService: ViewService) {
-        this.task = this._viewService.task;
+    constructor(private tasksService: TasksService, private viewService: ViewService) {
+        this.task = this.viewService.task;
     }
 
     public deleteTask(): void {
-        this._tasksService.deleteTask(this.task.id);
-        this._viewService.hide();
+        this.tasksService.deleteTask(this.task.id);
+        this.viewService.hide();
     }
 }

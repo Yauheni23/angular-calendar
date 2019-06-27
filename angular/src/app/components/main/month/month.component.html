@@ -3,7 +3,7 @@
         <app-days-of-week></app-days-of-week>
     </div>
     <div class="month__week" *ngFor="let week of dateInMonth">
-        <div class="month__day" *ngFor="let day of week" (click)="showEditor(); selectDay(day)">
+        <div class="month__day" *ngFor="let day of week" (click)="showEditor(day)">
             <app-link-to-day [day]="day"></app-link-to-day>
             <div class="month__tasks">
                 <app-task-for-month *ngFor="let task of getTasksForDay(day)"
