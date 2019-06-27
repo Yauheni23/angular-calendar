@@ -17,11 +17,8 @@ export class TasksService {
         this.data = new BehaviorSubject<Task[]>([]);
         this.cast = this.data.asObservable();
         this._dbService.getTasks().subscribe(data => {
-            this._tasks = data.payload.map((task: TaskResponse) => {
-                task.startDate = new Date(task.startDate);
-                task.endDate = new Date(task.endDate);
-                return task;
-            }) as Task[];
+            console.log(data);
+            this._tasks = data;
             this.data.next(this._tasks);
         });
     }
