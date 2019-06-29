@@ -3,6 +3,9 @@
         <div class='view-task_action view-task__delete' (mousedown)="deleteTask()">
             <i class="fas fa-trash-alt "></i>
         </div>
+        <div class='view-task_action view-task__edit' (mousedown)="editTask()">
+            <i class="fas fa-edit"></i>
+        </div>
         <div class="view-task__text">
             <span>Name: {{task.name}}</span>
         </div>

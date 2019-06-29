@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { createTimeMenu } from '../../utils/date';
 
 @Component( {
@@ -8,6 +8,7 @@ import { createTimeMenu } from '../../utils/date';
 } )
 export class SelectTimeComponent implements OnInit {
     @Input() public timeDefault: Date;
+    @Output() public changeDate: EventEmitter<Date> = new EventEmitter();
     public times: string[];
     public timeValue: number;
 
@@ -16,11 +17,13 @@ export class SelectTimeComponent implements OnInit {
     }
 
     public ngOnInit(): void {
-        this.timeValue = this.timeDefault.getHours() * 2;
+        this.timeValue = this.timeDefault.getHours() * 2 + this.timeDefault.getMinutes() / 30 | 0;
         this.setTime(this.timeValue);
     }
 
     public setTime( value: number): void {
         this.timeDefault.setHours( value / 2 ^ 0, value % 2 ? 30 : 0, 0);
+        this.changeDate.emit(this.timeDefault);
+        // console.log(this.timeDefault);
     }
 }

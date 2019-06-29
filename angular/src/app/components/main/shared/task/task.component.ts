@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { size, Time } from '../../../../constants';
 import { Task } from '../../../../models/task';
 import { ViewService } from '../../../../services/view.service';
+import { DateService } from '../../../../services/date.service';
 
 @Component({
     selector: 'app-task',
@@ -17,13 +18,18 @@ export class TaskComponent implements OnInit {
     public top: number;
     public height: number;
 
-    constructor(private viewService: ViewService) {
+    constructor(private viewService: ViewService, private dateService: DateService) {
     }
 
     public ngOnInit(): void {
-        this.top = (this.task.startDate.getHours() + this.task.startDate.getMinutes() / this.MINUTES_IN_HOUR) * this.heightHour;
-        this.height = ((+this.task.endDate - +this.task.startDate) / (Time.HourInMilliseconds / 2) | 0) * this.heightHour / 2
-            || this.heightHour / 2;
+        this.dateService.cast.subscribe(() => {
+            this.top = (this.task.startDate.getHours() + this.task.startDate.getMinutes() / this.MINUTES_IN_HOUR) * this.heightHour;
+            this.height = ((+this.task.endDate - +this.task.startDate) / (Time.HourInMilliseconds / 2) | 0) * this.heightHour / 2
+                || this.heightHour / 2;
+            if (this.height < this.heightHour / 2) {
+                this.height = this.heightHour / 2;
+            }
+        });
     }
 
     public showViewTask(event: MouseEvent): void {

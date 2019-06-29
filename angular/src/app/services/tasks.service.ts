@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Task, TaskResponse } from '../models/task';
+import { Task } from '../models/task';
 import { DataBaseService } from './db.service';
 import { convertInFormatInput, isTaskForSeveralDays } from '../utils/date';
 
@@ -13,41 +13,30 @@ export class TasksService {
     private data: BehaviorSubject<Task[]>;
     private _tasks: Task[] = [];
 
-    constructor(private _dbService: DataBaseService) {
+    constructor(private dbService: DataBaseService) {
         this.data = new BehaviorSubject<Task[]>([]);
         this.cast = this.data.asObservable();
-        this._dbService.getTasks().subscribe(data => {
-            console.log(data);
+        this.dbService.getTasks().subscribe(data => {
             this._tasks = data;
             this.data.next(this._tasks);
         });
     }
 
-    private static checkValidationTask(task: Task): Task {
-        if (+task.startDate > +task.endDate) {
-            task.endDate = task.startDate;
+    public saveTask(task: Task): void {
+        const id = this._tasks.findIndex(_task => _task.id === task.id);
+        if (id !== -1) {
+            this._tasks[id] = task;
+        } else {
+            this._tasks.push(task);
         }
-        return task;
-    }
-
-    public createTask(newTask: Task): void {
-        this._dbService.createTask(TasksService.checkValidationTask(newTask)).subscribe(data => {
-            if (data.result) {
-                this._tasks.push(newTask);
-                this.data.next(this._tasks);
-            }
-        });
+        this.data.next(this._tasks);
     }
 
     public deleteTask(id: string): void {
-        this._dbService.deleteTask(id).subscribe(data => {
-            if (data.result) {
-                this._tasks = this._tasks.filter(task => {
-                    return task.id !== id;
-                });
-                this.data.next(this._tasks);
-            }
+        this._tasks = this._tasks.filter(task => {
+            return task.id !== id;
         });
+        this.data.next(this._tasks);
     }
 
     public getTaskForDay(date: Date): Task[] {

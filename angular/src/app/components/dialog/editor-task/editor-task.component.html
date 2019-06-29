@@ -8,8 +8,8 @@
     </mat-form-field>
     <div class="editor-task__date">
         <app-date-picker [defaultDate]="task.startDate" (changeDate)="changeStartDate($event)"></app-date-picker>
-        <app-select-time [timeDefault]="task.startDate"></app-select-time>
-        <app-select-time [timeDefault]="task.endDate"></app-select-time>
+        <app-select-time [timeDefault]="task.startDate" (changeDate)="changeStartDate($event)"></app-select-time>
+        <app-select-time [timeDefault]="task.endDate" (changeDate)="changeEndDate($event)"></app-select-time>
         <app-date-picker [defaultDate]="task.endDate" (changeDate)="changeEndDate($event)"></app-date-picker>
     </div>
     <div class="editor-task__save">

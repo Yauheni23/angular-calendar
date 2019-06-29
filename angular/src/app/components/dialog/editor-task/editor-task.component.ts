@@ -1,9 +1,9 @@
 import { Component, ViewChildren } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 
-import { TasksService } from '../../../services/tasks.service';
 import { Task } from '../../../models/task';
 import { EditorService } from '../../../services/editor.service';
+import { DateService } from '../../../services/date.service';
 
 @Component({
     selector: 'app-editor-task',
@@ -15,14 +15,14 @@ export class EditorTaskComponent {
     public nameFormControl: FormControl;
     @ViewChildren('input') private input: any;
 
-    constructor(private tasksService: TasksService, private editorService: EditorService) {
+    constructor(private editorService: EditorService, private dateService: DateService) {
         this.task = this.editorService.initial();
         this.nameFormControl = new FormControl(this.task.name, Validators.required);
     }
 
     public createTask(): void {
         if (this.nameFormControl.value && this.nameFormControl.value.trim()) {
-            this.tasksService.createTask(this.task);
+            this.editorService.saveTask(this.task);
             this.editorService.hide();
         } else {
             this.nameFormControl.markAsTouched();
@@ -31,14 +31,20 @@ export class EditorTaskComponent {
     }
 
     public changeStartDate(date: Date): void {
-        this.task.startDate = date;
+        this.task.startDate = new Date(date);
+        this.updateViewTask();
     }
 
     public changeEndDate(date: Date): void {
-        this.task.endDate = date;
+        this.task.endDate = new Date(date);
+        this.updateViewTask();
     }
 
     public changeName(name: string): void {
         this.task.name = name;
+    }
+
+    private updateViewTask(): void {
+        this.dateService.setDisplayedDate(this.task.startDate);
     }
 }

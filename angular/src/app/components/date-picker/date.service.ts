@@ -9,13 +9,11 @@ export class DateService {
         this.cast = this.currentDate.asObservable();
     }
 
-    public static getDateFromString(date: string): Date {
+    public getDateFromString(date: string): Date {
         const newDate = date.match(/([1-9][0-9]{3})-(0[0-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])/);
-        if (newDate) {
-            return new Date(+newDate[1], +newDate[2] - 1, +newDate[3]);
-        }
 
-        return new Date();
+        return new Date(+newDate[1], +newDate[2] - 1, +newDate[3],
+            this.currentDate.value.getHours(), this.currentDate.value.getMinutes(), 0);
     }
 
     public get date(): Date {
@@ -27,6 +25,6 @@ export class DateService {
     }
 
     public setDateFromString(date: string): void {
-        this.date = DateService.getDateFromString(date);
+        this.date = this.getDateFromString(date);
     }
 }

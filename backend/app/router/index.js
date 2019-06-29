@@ -10,7 +10,7 @@ module.exports = (app) => {
 
     app.route('/guide')
         .get(guides.getGuideById)
-        .post(guides.createGuide)
+        .post(guides.saveGuide)
         .delete(guides.deleteGuide);
 
     app.get('/guides', guides.getAllGuides);

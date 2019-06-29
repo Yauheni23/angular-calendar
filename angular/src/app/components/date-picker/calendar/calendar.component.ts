@@ -46,7 +46,8 @@ export class CalendarComponent implements OnInit {
     }
 
     public changeDate(day: number): void {
-        this.dateService.date = new Date(this.date.getFullYear(), this.date.getMonth(), day);
+        this.dateService.date = new Date(this.date.getFullYear(), this.date.getMonth(), day,
+            this.displayedDate.getHours(), this.displayedDate.getMinutes());
         this.hideCalendar.emit();
     }
 
