@@ -27,7 +27,7 @@ export class ViewTaskComponent {
         this.viewService.hide();
     }
 
-    private deleteTaskKeyboard(key: string) {
+    private deleteTaskKeyboard(key: string): void {
         if (KeyBoard.Delete === key) {
             this.deleteTask();
         }

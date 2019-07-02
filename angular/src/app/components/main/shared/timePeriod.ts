@@ -8,7 +8,7 @@ export abstract class TimePeriod {
     public readonly heightHour = size.heightHour;
     public displayedDate: Date;
 
-    public get month() {
+    public get month(): number {
         return this.displayedDate.getMonth();
     }
 

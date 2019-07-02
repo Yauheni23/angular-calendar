@@ -45,7 +45,7 @@ export class EditorTaskComponent {
         this.task.name = name;
     }
 
-    private saveTaskKeyboard(key: string) {
+    private saveTaskKeyboard(key: string): void {
         if (KeyBoard.Enter === key) {
             this.createTask();
         }

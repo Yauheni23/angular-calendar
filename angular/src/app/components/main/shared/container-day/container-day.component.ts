@@ -1,6 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { DateService } from '../../../../services/date.service';
-import { TasksService } from '../../../../services/tasks.service';
 import { EditorService } from '../../../../services/editor.service';
 import { size } from '../../../../constants';
 
@@ -9,7 +8,7 @@ import { size } from '../../../../constants';
     templateUrl: './container-day.component.html',
     styleUrls: [ './container-day.component.less' ],
 })
-export class ContainerDayComponent implements OnInit {
+export class ContainerDayComponent {
     public readonly heightDay: number = size.heightDay;
     public readonly heightHour: number = size.heightHour;
     public displayedDate: Date;
@@ -19,16 +18,14 @@ export class ContainerDayComponent implements OnInit {
         this.dateService.cast.subscribe(data => {
             this.displayedDate = data;
         });
+        this.showEditor = this.showEditor.bind(this);
     }
 
-    public ngOnInit() {
-    }
-
-    public showEditor = () => {
+    public showEditor(): void {
         this.editorService.show();
     }
 
-    public selectDay(hour?: number) {
+    public selectDay(hour?: number): void {
         this.dateService.setDisplayedDate(new Date(
             this.displayedDate.getFullYear(),
             this.displayedDate.getMonth(),

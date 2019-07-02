@@ -60,7 +60,7 @@ export class CalendarComponent implements OnInit {
     }
 
     public isCurrentMonth(dayOfWeek: number): string {
-        return this.month !== this.getDate(dayOfWeek).getMonth() ? Color.Gray : '';
+        return this.month !== this.getDate(dayOfWeek).getMonth() ? Color.DifferentMonth : '';
     }
 
     private getDate(day: number): Date {

@@ -10,7 +10,7 @@ import { ViewService } from '../../../services/view.service';
 })
 export class DialogComponent implements OnInit {
     @Output() public eventKeyBoard: EventEmitter<string> = new EventEmitter();
-    @Input() private keyboard: string[] = [];
+    @Input() private keyboard: string[];
 
     constructor(private editorService: EditorService, private viewService: ViewService) {
         this.addKeyboardEvents = this.addKeyboardEvents.bind(this);

@@ -3,25 +3,24 @@ export const calendar = {
     DAYS_OF_WEEK_SHORT: [ 'Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa' ],
     MONTH: [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ],
     DAYS_OF_WEEK: [ 'Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat' ],
-    MODES: ['month', 'week', 'day']
-}
+    MODES: [ 'month', 'week', 'day' ],
+};
 
 export const size = {
     heightHour: 48,
     heightDay: 48 * 24,
-}
+};
 
 export enum Time {
-    HourInMilliseconds = 3600000,
-    DayInMilliseconds = 3600000 * 24
+    HourInMilliseconds = 3600000
 }
 
-export enum modes {
+export enum Modes {
     Month = 'month',
     Week = 'week',
     Day = 'day',
 }
 
-export enum server {
-    address = 'http://172.18.144.5:3000'
+export enum Server {
+    Address = 'http://172.18.144.5:3000'
 }

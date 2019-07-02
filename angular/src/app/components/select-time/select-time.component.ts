@@ -24,6 +24,5 @@ export class SelectTimeComponent implements OnInit {
     public setTime( value: number): void {
         this.timeDefault.setHours( value / 2 ^ 0, value % 2 ? 30 : 0, 0);
         this.changeDate.emit(this.timeDefault);
-        // console.log(this.timeDefault);
     }
 }

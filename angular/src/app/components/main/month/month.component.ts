@@ -29,10 +29,6 @@ export class MonthComponent extends TimePeriod {
         this.showEditor = this.showEditor.bind(this);
     }
 
-    public getDate(day: number): Date {
-        return new Date(this.displayedDate.getFullYear(), this.displayedDate.getMonth(), day);
-    }
-
     public getTasksForDay(day: number): Task[] {
         return this.tasks.filter(task => {
             return task.startDate.toDateString() === this.getDate(day).toDateString();

@@ -19,11 +19,7 @@ export class LinkToDayComponent {
     }
 
     public selectDay(day: number): void {
-        this.dateService.setDisplayedDate(new Date(
-            this.displayedDate.getFullYear(),
-            this.displayedDate.getMonth(),
-            day,
-        ));
+        this.dateService.setDisplayedDate(new Date(this.displayedDate.getFullYear(), this.displayedDate.getMonth(), day));
     }
 
     public isToday(day: number): string {
@@ -31,7 +27,7 @@ export class LinkToDayComponent {
     }
 
     public isCurrentMonth(dayOfWeek: number): string {
-        return this.displayedDate.getMonth() !== this.getDate(dayOfWeek).getMonth() ? Color.Gray : '';
+        return this.displayedDate.getMonth() !== this.getDate(dayOfWeek).getMonth() ? Color.DifferentMonth : '';
     }
 
     public getMonthName(day: number): string {

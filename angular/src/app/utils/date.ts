@@ -1,4 +1,4 @@
-import { modes } from '../constants';
+import { Modes } from '../constants';
 import { Task } from '../models/task';
 
 export function getCountDaysInMonth(date): number {
@@ -71,13 +71,13 @@ export function changeDate(date: Date, mode: string, isPrev: boolean): void {
     const prevOrNext = isPrev ? -1 : 1;
 
     switch (mode) {
-        case modes.Month:
+        case Modes.Month:
             date.setMonth(date.getMonth() + prevOrNext);
             break;
-        case modes.Week:
+        case Modes.Week:
             date.setDate(date.getDate() + prevOrNext * COUNT_DAY_IN_WEEK);
             break;
-        case modes.Day:
+        case Modes.Day:
             date.setDate(date.getDate() + prevOrNext);
             break;
     }
