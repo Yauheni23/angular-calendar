@@ -1,7 +1,7 @@
-<app-dialog>
+<app-dialog [keyboard]="['Enter']" (eventKeyBoard)="saveTaskKeyboard($event)">
     <mat-form-field class='editor-task__name'>
         <input matInput placeholder="Name" [formControl]="nameFormControl" #input
-               (change)="changeName(nameFormControl.value)">
+               (input)="changeName(nameFormControl.value)">
         <mat-error *ngIf="nameFormControl.hasError('required')">
             Name is <strong>required</strong>
         </mat-error>

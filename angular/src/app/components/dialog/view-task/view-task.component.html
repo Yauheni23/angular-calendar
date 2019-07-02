@@ -1,4 +1,4 @@
-<app-dialog>
+<app-dialog [keyboard]="['Delete']" (eventKeyBoard)="deleteTaskKeyboard($event)">
     <div class="view-task">
         <div class='view-task_action view-task__delete' (mousedown)="deleteTask()">
             <i class="fas fa-trash-alt "></i>

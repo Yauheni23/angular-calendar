@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { calendar } from '../../../constants';
-import { eventListener } from '../../constants';
+import { EventListener } from '../../constants';
 
 @Component({
     selector: 'app-select-mode',
@@ -32,11 +32,11 @@ export class SelectModeComponent {
 
     private showMenu(): void {
         this.isVisible = true;
-        document.addEventListener(eventListener.Click, this.hideMenu);
+        document.addEventListener(EventListener.Click, this.hideMenu);
     }
 
     private hideMenu(): void {
         this.isVisible = false;
-        document.removeEventListener(eventListener.Click, this.hideMenu);
+        document.removeEventListener(EventListener.Click, this.hideMenu);
     }
 }

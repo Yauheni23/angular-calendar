@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DateService } from './date.service';
-import { eventListener } from '../constants';
+import { EventListener } from '../constants';
 
 @Component({
     selector: 'app-date-picker',
@@ -33,14 +33,14 @@ export class DatePickerComponent implements OnInit {
     public toggleCalendar(): void {
         this.isVisible = !this.isVisible;
         if (this.isVisible) {
-            document.addEventListener(eventListener.MouseDown, this.hideCalendar);
+            document.addEventListener(EventListener.MouseDown, this.hideCalendar);
         } else {
-            document.removeEventListener(eventListener.MouseDown, this.hideCalendar);
+            document.removeEventListener(EventListener.MouseDown, this.hideCalendar);
         }
     }
 
     public hideCalendar(): void  {
-        document.removeEventListener(eventListener.MouseDown, this.hideCalendar);
+        document.removeEventListener(EventListener.MouseDown, this.hideCalendar);
         this.isVisible = false;
     }
 }

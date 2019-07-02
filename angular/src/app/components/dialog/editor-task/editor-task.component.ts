@@ -4,6 +4,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { Task } from '../../../models/task';
 import { EditorService } from '../../../services/editor.service';
 import { DateService } from '../../../services/date.service';
+import { KeyBoard } from '../../constants';
 
 @Component({
     selector: 'app-editor-task',
@@ -42,6 +43,12 @@ export class EditorTaskComponent {
 
     public changeName(name: string): void {
         this.task.name = name;
+    }
+
+    private saveTaskKeyboard(key: string) {
+        if (KeyBoard.Enter === key) {
+            this.createTask();
+        }
     }
 
     private updateViewTask(): void {

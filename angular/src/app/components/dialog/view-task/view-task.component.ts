@@ -3,6 +3,7 @@ import { Task } from '../../../models/task';
 import { TasksService } from '../../../services/tasks.service';
 import { ViewService } from '../../../services/view.service';
 import { EditorService } from '../../../services/editor.service';
+import { KeyBoard } from '../../constants';
 
 @Component({
     selector: 'app-view-task',
@@ -24,5 +25,11 @@ export class ViewTaskComponent {
     public deleteTask(): void {
         this.viewService.deleteTask(this.task.id);
         this.viewService.hide();
+    }
+
+    private deleteTaskKeyboard(key: string) {
+        if (KeyBoard.Delete === key) {
+            this.deleteTask();
+        }
     }
 }

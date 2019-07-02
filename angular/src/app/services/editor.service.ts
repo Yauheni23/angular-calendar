@@ -19,7 +19,7 @@ export class EditorService extends DialogService {
 
     private static checkValidationTask(task: Task): Task {
         if (+task.startDate > +task.endDate) {
-            task.endDate = task.startDate;
+            task.endDate = new Date(task.startDate);
         }
         return task;
     }

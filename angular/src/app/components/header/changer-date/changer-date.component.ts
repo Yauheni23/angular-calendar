@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { calendar } from '../../../constants';
 import { DateService } from '../../../services/date.service';
-import { eventListener, keyBoard } from '../../constants';
+import { EventListener, KeyBoard } from '../../constants';
 import { changeDate } from '../../../utils/date';
 
 @Component({
@@ -16,7 +16,7 @@ export class ChangerDateComponent {
 
     constructor(private dateService: DateService) {
         this.dateService.cast.subscribe(data => this.displayedDate = new Date(data));
-        document.addEventListener(eventListener.KeyDown, this.addKeyboardEvent);
+        document.addEventListener(EventListener.KeyDown, this.addKeyboardEvent);
     }
 
     public getMonth(): number {
@@ -41,10 +41,10 @@ export class ChangerDateComponent {
     }
 
     private addKeyboardEvent = (event: KeyboardEvent): void => {
-        if (event.key === keyBoard.ArrowLeft) {
+        if (event.key === KeyBoard.ArrowLeft) {
             this.changeDisplayedDate(true);
         }
-        if (event.key === keyBoard.ArrowRight) {
+        if (event.key === KeyBoard.ArrowRight) {
             this.changeDisplayedDate(false);
         }
     }
